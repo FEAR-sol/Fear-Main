@@ -7,26 +7,26 @@ const ParallaxServices = () => {
     {
       title: 'Web Development',
       image: '/web.jpg',
-      link: '#', // Replace with your actual link
+      link: 'https://fear-web-dev.netlify.app/', // Replace with your actual link
      
     },
     {
       title: 'App Development',
       image: '/APP.png',
-      link: '#', // Replace with your actual link
+      link: 'https://app-development2101.netlify.app/', // Replace with your actual link
       
       
     },
     {
       title: 'AI Solutions',
       image: '/AI.jpg',
-      link: '#', // Replace with your actual link
+      link: 'https://fear-ai-solutions.netlify.app/', // Replace with your actual link
       
     },
     {
       title: 'Branding\nAnd Collaboration',
       image: '/branding.png',
-      link: '#', // Replace with your actual link
+      link: 'https://fear-branding.netlify.app/', // Replace with your actual link
       
     }
   ];
