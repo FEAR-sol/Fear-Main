@@ -27,15 +27,31 @@ function AppContent() {
   return (
     <>
       <PageLoader isLoading={isPageLoading} />
-      <div className="bg-radial-gray min-h-screen flex flex-col">
+      <div 
+        className="bg-radial-gray min-h-screen flex flex-col no-horizontal-scroll viewport-safe" 
+        style={{ 
+          overflow: 'hidden', 
+          maxWidth: '100vw', 
+          width: '100vw',
+          position: 'relative'
+        }}
+      >
         <Navbar />
-        <div className="flex-grow">
+        <main 
+          className="flex-grow no-horizontal-scroll viewport-safe" 
+          style={{ 
+            overflow: 'hidden', 
+            maxWidth: '100vw', 
+            width: '100vw',
+            position: 'relative'
+          }}
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
-        </div>
+        </main>
         <Footer />
         <Chatbot />
       </div>

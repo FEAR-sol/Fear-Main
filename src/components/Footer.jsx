@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
-    <footer className="bg-fear-dark py-6 px-4 sm:px-6 md:px-8">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+    <footer className="bg-fear-dark py-6 px-4 sm:px-6 md:px-8 w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
         {/* Left Side - Copyright */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

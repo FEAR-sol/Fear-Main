@@ -17,24 +17,25 @@ const Loader = () => {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-radial-gray"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-radial-gray overflow-hidden w-full max-w-full"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          <div className="relative flex flex-col items-center">
+          <div className="relative flex flex-col items-center w-full max-w-full px-4">
             {/* Animated FEAR Logo */}
             <motion.div
-              className="relative"
+              className="relative overflow-hidden"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
             >
               {/* Main FEAR Text */}
               <motion.h1 
-                className="font-serif text-8xl font-normal tracking-tight text-fear-dark"
-                initial={{ letterSpacing: '0.5em', opacity: 0 }}
-                animate={{ letterSpacing: '-0.02em', opacity: 1 }}
+                className="font-serif text-6xl sm:text-7xl md:text-8xl font-normal text-fear-dark text-center"
+                style={{ letterSpacing: '-0.02em' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
               >
                 FEAR
@@ -52,7 +53,7 @@ const Loader = () => {
             </motion.p>
 
             {/* Loading Bar */}
-            <div className="w-64 h-1 bg-fear-dark/20 rounded-full mt-8 overflow-hidden">
+            <div className="w-48 sm:w-64 h-1 bg-fear-dark/20 rounded-full mt-8 overflow-hidden">
               <motion.div
                 className="h-full bg-fear-dark rounded-full"
                 initial={{ width: '0%' }}
@@ -81,26 +82,6 @@ const Loader = () => {
                 />
               ))}
             </div>
-
-            {/* Rotating Circle Accent */}
-            <motion.div
-              className="absolute -z-10"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            >
-              <svg width="300" height="300" viewBox="0 0 300 300">
-                <circle
-                  cx="150"
-                  cy="150"
-                  r="140"
-                  stroke="#1A1A1A"
-                  strokeWidth="1"
-                  fill="none"
-                  strokeDasharray="4 8"
-                  opacity="0.2"
-                />
-              </svg>
-            </motion.div>
           </div>
         </motion.div>
       )}

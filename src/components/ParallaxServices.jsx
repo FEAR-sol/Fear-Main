@@ -7,27 +7,46 @@ const ParallaxServices = () => {
     {
       title: 'Web Development',
       image: '/web.jpg',
-      link: 'https://fear-web-dev.netlify.app/', // Replace with your actual link
-     
+      link: 'https://fear-web-dev.netlify.app/',
+      items: [
+        'Web Design',
+        'Web Development', 
+        'Host And Maintenance',
+        'SEO optimization And Integration'
+      ]
     },
     {
       title: 'App Development',
       image: '/APP.png',
-      link: 'https://app-development2101.netlify.app/', // Replace with your actual link
-      
-      
+      link: 'https://app-development2101.netlify.app/',
+      items: [
+        'App Design',
+        'App Development',
+        'Maintenance and Support', 
+        'ASO and Integration'
+      ]
     },
     {
       title: 'AI Solutions',
       image: '/AI.jpg',
-      link: 'https://fear-ai-solutions.netlify.app/', // Replace with your actual link
-      
+      link: 'https://fear-ai-solutions.netlify.app/',
+      items: [
+        'AI Customization',
+        'AI Automation',
+        'AI Chatbot',
+        'AI Voice Assistant'
+      ]
     },
     {
       title: 'Branding\nAnd Collaboration',
       image: '/branding.png',
-      link: 'https://fear-branding.netlify.app/', // Replace with your actual link
-      
+      link: 'https://fear-branding.netlify.app/',
+      items: [
+        'Logo Design',
+        'Poster Design',
+        'Thumbnail Design',
+        'Brochure Design'
+      ]
     }
   ];
 
@@ -44,7 +63,8 @@ const ParallaxServices = () => {
   };
 
   return (
-    <section id="services" className="relative py-12 sm:py-16 md:py-20 bg-fear-dark">
+    <section id="services" className="relative py-12 sm:py-16 md:py-20 bg-fear-dark w-full max-w-full" style={{ overflow: 'hidden' }}>
+      <div className="absolute inset-0 w-full h-full" style={{ overflow: 'hidden' }}>
       {/* Animated Background Pattern */}
       <motion.div
         className="absolute inset-0 opacity-5"
@@ -60,12 +80,13 @@ const ParallaxServices = () => {
           ease: "linear"
         }}
       />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 w-full">
           {/* Sticky Text Section */}
           <motion.div 
-            className="lg:sticky lg:top-32 lg:self-start h-fit"
+            className="lg:sticky lg:top-32 lg:self-start h-fit w-full max-w-full overflow-hidden"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -96,7 +117,7 @@ const ParallaxServices = () => {
             </motion.div>
 
             <motion.h2 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 sm:mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6"
               variants={textVariants}
             >
               Four Pillars of<br />Forward Thinking.
@@ -139,11 +160,11 @@ const ParallaxServices = () => {
           </motion.div>
 
           {/* Scrolling Services Section */}
-          <div className="space-y-6 sm:space-y-8 py-4 sm:py-6 md:py-8">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8 py-2 sm:py-4 md:py-6 lg:py-8 w-full max-w-full overflow-hidden">
             {services.map((service, index) => (
               <motion.div 
                 key={index} 
-                className="min-h-[20vh] sm:min-h-[25vh] lg:min-h-[30vh] flex items-center relative"
+                className="min-h-[auto] sm:min-h-[20vh] md:min-h-[25vh] lg:min-h-[30vh] flex items-center relative"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50 }}
@@ -154,9 +175,9 @@ const ParallaxServices = () => {
                   ease: [0.6, -0.05, 0.01, 0.99]
                 }}
               >
-                {/* Number Badge */}
+                {/* Number Badge - Hidden on mobile to prevent overflow */}
                 <motion.div
-                  className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center font-serif text-lg sm:text-xl font-bold text-black shadow-lg"
+                  className="absolute left-2 md:left-4 lg:-left-2 xl:-left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center font-serif text-sm sm:text-lg md:text-xl font-bold text-black shadow-lg z-10 hidden sm:flex mobile-hide"
                   initial={{ scale: 0, rotate: -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   exit={{ scale: 0, rotate: 180 }}
@@ -165,7 +186,7 @@ const ParallaxServices = () => {
                 >
                   {index + 1}
                 </motion.div>
-                <div className="w-full">
+                <div className="w-full sm:pl-6 md:pl-8 lg:pl-8 xl:pl-12">
                   <ServiceCard 
                     title={service.title} 
                     items={service.items}

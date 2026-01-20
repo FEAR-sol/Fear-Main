@@ -49,7 +49,7 @@ const About = () => {
   };
 
   return (
-    <section className="min-h-screen py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 flex items-center justify-center relative overflow-hidden w-full max-w-full">
       {/* Animated Background Elements */}
       <motion.div
         className="absolute top-0 left-0 w-full h-full opacity-5"
@@ -68,7 +68,7 @@ const About = () => {
       />
 
       <motion.div 
-        className="max-w-6xl mx-auto relative z-10 w-full"
+        className="max-w-6xl mx-auto relative z-10 w-full max-w-full"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
@@ -89,7 +89,7 @@ const About = () => {
             <motion.h2 
               className="font-jacques text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-black"
             >
-              Our story so far
+              Our story 
             </motion.h2>
             <motion.div
               className="h-px w-12 sm:w-20 bg-black"
@@ -427,7 +427,7 @@ const About = () => {
           </motion.div>
           
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto w-full"
             variants={{
               visible: {
                 transition: {
@@ -439,7 +439,7 @@ const About = () => {
             {teamMembers.map((member, index) => (
               <motion.div 
                 key={index} 
-                className="flex flex-col items-center relative group"
+                className="flex flex-col items-center relative group w-full max-w-full"
                 variants={cardVariants}
                 whileHover={{ 
                   y: -10,

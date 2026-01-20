@@ -38,12 +38,12 @@ const Hero = () => {
     }
   };
 
-  // Floating shapes data
+  // Floating shapes data - Safe positioning for mobile
   const floatingShapes = [
-    { size: 300, delay: 0, duration: 20, x: '10%', y: '20%' },
-    { size: 200, delay: 2, duration: 25, x: '80%', y: '60%' },
-    { size: 150, delay: 4, duration: 18, x: '70%', y: '10%' },
-    { size: 250, delay: 1, duration: 22, x: '15%', y: '70%' },
+    { size: 200, delay: 0, duration: 20, x: '15%', y: '25%' },
+    { size: 150, delay: 2, duration: 25, x: '75%', y: '65%' },
+    { size: 120, delay: 4, duration: 18, x: '65%', y: '15%' },
+    { size: 180, delay: 1, duration: 22, x: '20%', y: '75%' },
   ];
 
   const stats = [
@@ -53,22 +53,24 @@ const Hero = () => {
   ];
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 relative overflow-hidden">
-      {/* Animated Background Shapes */}
+    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 relative w-full max-w-full" style={{ overflow: 'hidden' }}>
+      <div className="absolute inset-0 w-full h-full" style={{ overflow: 'hidden' }}>
+      {/* Animated Background Shapes - Completely hidden on mobile */}
       {floatingShapes.map((shape, index) => (
         <motion.div
           key={index}
-          className="absolute rounded-full bg-gradient-to-br from-fear-card/30 to-fear-card/10 blur-3xl hidden md:block"
+          className="absolute rounded-full bg-gradient-to-br from-fear-card/30 to-fear-card/10 blur-3xl hidden lg:block mobile-hide"
           style={{
-            width: shape.size,
-            height: shape.size,
+            width: Math.min(shape.size, 150), // Further reduced size
+            height: Math.min(shape.size, 150),
             left: shape.x,
             top: shape.y,
+            transform: 'translate(-50%, -50%)',
           }}
           animate={{
-            y: [0, -30, 0],
-            x: [0, 20, 0],
-            scale: [1, 1.1, 1],
+            y: [0, -15, 0],
+            x: [0, 10, 0],
+            scale: [1, 1.02, 1],
           }}
           transition={{
             duration: shape.duration,
@@ -84,24 +86,19 @@ const Hero = () => {
         backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
         backgroundSize: '50px 50px'
       }} />
+      </div>
 
       <motion.div 
-        className="max-w-container mx-auto text-center relative z-10"
+        className="max-w-container mx-auto text-center relative z-10 w-full"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         {/* Decorative Top Element */}
         <motion.div
-          className="flex items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8"
+          className="flex items-center justify-center mb-6 sm:mb-8"
           variants={itemVariants}
         >
-          <motion.div 
-            className="h-px w-8 sm:w-16 bg-black"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          />
           <motion.span 
             className="text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] text-gray-600 font-medium"
             initial={{ opacity: 0 }}
@@ -110,18 +107,12 @@ const Hero = () => {
           >
             WELCOME TO
           </motion.span>
-          <motion.div 
-            className="h-px w-8 sm:w-16 bg-black"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          />
         </motion.div>
 
         {/* Main Title with Gradient */}
-        <motion.div className="relative inline-block mb-4 sm:mb-6">
+        <motion.div className="relative inline-block mb-4 sm:mb-6 w-full max-w-full overflow-hidden">
           <motion.h1 
-            className="font-serif text-6xl sm:text-8xl md:text-hero font-normal tracking-tight relative z-10"
+            className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-hero font-normal tracking-tight relative z-10 break-words"
             style={{
               background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)',
               WebkitBackgroundClip: 'text',
@@ -133,9 +124,9 @@ const Hero = () => {
             FEAR
           </motion.h1>
           
-          {/* Decorative Brackets - Hidden on mobile */}
+          {/* Decorative Brackets - Completely hidden on mobile */}
           <motion.div
-            className="absolute -left-8 sm:-left-12 top-1/2 -translate-y-1/2 text-4xl sm:text-6xl text-fear-card font-serif hidden sm:block"
+            className="absolute left-4 md:-left-8 lg:-left-12 top-1/2 -translate-y-1/2 text-2xl md:text-6xl text-fear-card font-serif hidden xl:block mobile-hide"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
@@ -143,7 +134,7 @@ const Hero = () => {
             [
           </motion.div>
           <motion.div
-            className="absolute -right-8 sm:-right-12 top-1/2 -translate-y-1/2 text-4xl sm:text-6xl text-fear-card font-serif hidden sm:block"
+            className="absolute right-4 md:-right-8 lg:-right-12 top-1/2 -translate-y-1/2 text-2xl md:text-6xl text-fear-card font-serif hidden xl:block mobile-hide"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}

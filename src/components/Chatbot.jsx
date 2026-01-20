@@ -124,7 +124,7 @@ const Chatbot = () => {
     <>
       {/* Chat Button */}
       <motion.button
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 sm:w-16 sm:h-16 bg-fear-dark rounded-full shadow-lg flex items-center justify-center text-white hover:bg-black transition-colors duration-300"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-fear-dark rounded-full shadow-lg flex items-center justify-center text-white hover:bg-black transition-colors duration-300"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -139,7 +139,7 @@ const Chatbot = () => {
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
-              className="w-6 h-6"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -152,7 +152,7 @@ const Chatbot = () => {
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
-              className="w-6 h-6"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -167,25 +167,25 @@ const Chatbot = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-24 right-6 z-50 w-[90vw] sm:w-96 h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-16 right-2 sm:bottom-24 sm:right-6 z-50 w-[calc(100vw-1rem)] max-w-[380px] sm:w-96 h-[70vh] max-h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             {/* Header */}
-            <div className="bg-fear-dark text-white p-4 flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-fear-dark font-bold">
+            <div className="bg-fear-dark text-white p-3 sm:p-4 flex items-center gap-3 flex-shrink-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center text-fear-dark font-bold text-sm sm:text-base">
                 C
               </div>
-              <div>
-                <h3 className="font-semibold text-lg">Cyra</h3>
-                <p className="text-xs text-gray-300">FEAR AI Assistant</p>
+              <div className="min-w-0 flex-1">
+                <h3 className="font-semibold text-base sm:text-lg truncate">Cyra</h3>
+                <p className="text-xs text-gray-300 truncate">FEAR AI Assistant</p>
               </div>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50 min-h-0">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
@@ -195,13 +195,13 @@ const Chatbot = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-2xl ${
+                    className={`max-w-[85%] p-2.5 sm:p-3 rounded-2xl break-words ${
                       message.type === 'user'
                         ? 'bg-fear-dark text-white rounded-br-none'
                         : 'bg-white text-gray-800 rounded-bl-none shadow-sm'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-line">{message.text}</p>
+                    <p className="text-xs sm:text-sm whitespace-pre-line leading-relaxed">{message.text}</p>
                   </div>
                 </motion.div>
               ))}
@@ -209,8 +209,8 @@ const Chatbot = () => {
             </div>
 
             {/* Input */}
-            <div className="p-4 bg-white border-t border-gray-200">
-              <div className="flex gap-2">
+            <div className="p-3 sm:p-4 bg-white border-t border-gray-200 flex-shrink-0">
+              <div className="flex gap-2 w-full">
                 <input
                   type="text"
                   id="chatbot-input"
@@ -219,13 +219,13 @@ const Chatbot = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Ask me anything about FEAR..."
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-fear-dark text-sm"
+                  className="flex-1 min-w-0 px-3 sm:px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-fear-dark text-xs sm:text-sm"
                 />
                 <button
                   onClick={handleSend}
-                  className="w-10 h-10 bg-fear-dark text-white rounded-full flex items-center justify-center hover:bg-black transition-colors duration-300"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-fear-dark text-white rounded-full flex items-center justify-center hover:bg-black transition-colors duration-300 flex-shrink-0"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                   </svg>
                 </button>

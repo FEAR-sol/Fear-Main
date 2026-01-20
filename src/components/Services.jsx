@@ -42,27 +42,57 @@ const Services = () => {
   ];
 
   return (
-    <section className="min-h-screen py-16 sm:py-20 px-4 sm:px-6 md:px-8 overflow-hidden relative bg-gradient-to-b from-fear-dark/5 to-transparent">
-      {/* Animated Background Elements */}
-      <motion.div
-        className="absolute inset-0 opacity-10"
-        animate={{
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: 'reverse',
-        }}
-        style={{
-          backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-        }}
-      />
+    <section className="min-h-screen py-16 sm:py-20 px-4 sm:px-6 md:px-8 relative bg-gradient-to-b from-fear-dark/5 to-transparent w-full max-w-full" style={{ overflow: 'hidden' }}>
+      <div className="absolute inset-0 w-full h-full" style={{ overflow: 'hidden' }}>
+        {/* Animated Background Elements */}
+        <motion.div
+          className="absolute inset-0 opacity-10"
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px)',
+            backgroundSize: '50px 50px',
+          }}
+        />
+
+        {/* Floating Decorative Elements - Hidden on mobile */}
+        <motion.div
+          className="absolute top-20 left-4 sm:left-10 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-fear-dark/5 blur-xl hidden md:block mobile-hide"
+          animate={{
+            y: [0, 50, 0],
+            x: [0, 30, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-4 sm:right-10 w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-fear-dark/5 blur-xl hidden md:block mobile-hide"
+          animate={{
+            y: [0, -40, 0],
+            x: [0, -20, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        />
+      </div>
 
       {/* Section Title */}
       <motion.div
-        className="text-center mb-16 sm:mb-20 relative z-10"
+        className="text-center mb-16 sm:mb-20 relative z-10 w-full max-w-full"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -87,8 +117,8 @@ const Services = () => {
       </motion.div>
 
       {/* Grid Layout with Staggered Animation */}
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 w-full">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -139,9 +169,9 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Floating Decorative Elements */}
+      {/* Floating Decorative Elements - Positioned safely */}
       <motion.div
-        className="absolute top-20 left-10 w-20 h-20 rounded-full bg-fear-dark/5 blur-xl"
+        className="absolute top-20 left-4 sm:left-10 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-fear-dark/5 blur-xl"
         animate={{
           y: [0, 50, 0],
           x: [0, 30, 0],
@@ -154,7 +184,7 @@ const Services = () => {
         }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-fear-dark/5 blur-xl"
+        className="absolute bottom-20 right-4 sm:right-10 w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-fear-dark/5 blur-xl"
         animate={{
           y: [0, -40, 0],
           x: [0, -20, 0],

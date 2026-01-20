@@ -86,10 +86,10 @@ const Contact = () => {
   };
 
   return (
-    <section className="min-h-screen py-24 sm:py-28 md:py-32 px-4 sm:px-6 md:px-8 flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background Circles - Hidden on mobile */}
+    <section className="min-h-screen py-24 sm:py-28 md:py-32 px-4 sm:px-6 md:px-8 flex items-center justify-center relative overflow-hidden w-full max-w-full">
+      {/* Animated Background Circles - Hidden on mobile and positioned safely */}
       <motion.div
-        className="absolute top-20 right-20 w-64 h-64 bg-fear-card/20 rounded-full blur-3xl hidden md:block"
+        className="absolute top-20 right-4 sm:right-20 w-32 h-32 sm:w-64 sm:h-64 bg-fear-card/20 rounded-full blur-3xl hidden md:block"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3]
@@ -101,7 +101,7 @@ const Contact = () => {
         }}
       />
       <motion.div
-        className="absolute bottom-20 left-20 w-96 h-96 bg-fear-card/20 rounded-full blur-3xl hidden md:block"
+        className="absolute bottom-20 left-4 sm:left-20 w-48 h-48 sm:w-96 sm:h-96 bg-fear-card/20 rounded-full blur-3xl hidden md:block"
         animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.5, 0.3, 0.5]
@@ -114,12 +114,13 @@ const Contact = () => {
       />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start w-full">
           {/* Left Side - Content */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={containerVariants}
+            className="w-full max-w-full overflow-hidden"
           >
             <motion.div
               className="flex items-center gap-4 mb-6"
@@ -190,7 +191,7 @@ const Contact = () => {
               <h3 className="text-lg sm:text-xl font-medium text-black mb-4 sm:mb-6">Follow Us On:</h3>
               <div className="flex gap-3 sm:gap-4">
                 <motion.a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/fear_agency/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 flex items-center justify-center"
@@ -203,7 +204,7 @@ const Contact = () => {
                 </motion.a>
 
                 <motion.a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61585103735284"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-blue-600 flex items-center justify-center"
@@ -216,7 +217,7 @@ const Contact = () => {
                 </motion.a>
 
                 <motion.a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/feed/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-blue-700 flex items-center justify-center"
@@ -236,23 +237,23 @@ const Contact = () => {
             initial="hidden"
             animate="visible"
             variants={formVariants}
-            className="relative"
+            className="relative w-full max-w-full overflow-hidden"
           >
-            {/* Decorative Corner Elements - Hidden on mobile */}
+            {/* Decorative Corner Elements - Hidden on mobile and positioned safely */}
             <motion.div
-              className="absolute -top-4 -left-4 w-16 h-16 sm:w-20 sm:h-20 border-t-4 border-l-4 border-black/20 hidden sm:block"
+              className="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 border-t-4 border-l-4 border-black/20 hidden sm:block"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             />
             <motion.div
-              className="absolute -bottom-4 -right-4 w-16 h-16 sm:w-20 sm:h-20 border-b-4 border-r-4 border-black/20 hidden sm:block"
+              className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 border-b-4 border-r-4 border-black/20 hidden sm:block"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7, duration: 0.6 }}
             />
 
-            <div className="rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 relative overflow-hidden" style={{ backgroundColor: '#BFBCB6' }}>
+            <div className="rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 relative overflow-hidden w-full" style={{ backgroundColor: '#BFBCB6' }}>
               {/* Animated Background Pattern */}
               <motion.div
                 className="absolute inset-0 opacity-5"

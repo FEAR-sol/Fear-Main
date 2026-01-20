@@ -6,12 +6,20 @@ import WhyChooseFear from '../components/WhyChooseFear';
 
 const Home = () => {
   return (
-    <>
+    <div 
+      className="viewport-safe no-horizontal-scroll" 
+      style={{ 
+        overflow: 'hidden', 
+        maxWidth: '100vw', 
+        width: '100vw',
+        position: 'relative'
+      }}
+    >
       <Hero />
       <Services />
       <ParallaxServices />
       <WhyChooseFear />
-    </>
+    </div>
   );
 };
 

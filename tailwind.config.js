@@ -23,6 +23,14 @@ module.exports = {
       },
       maxWidth: {
         'container': '1200px',
+        'full': '100%',
+        'screen': '100vw',
+        'none': 'none',
+        'viewport': '100vw',
+      },
+      width: {
+        'screen': '100vw',
+        'viewport': '100vw',
       },
       fontSize: {
         'hero': ['5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
@@ -31,4 +39,8 @@ module.exports = {
     },
   },
   plugins: [],
+  corePlugins: {
+    // Disable utilities that might cause overflow
+    container: false,
+  },
 }

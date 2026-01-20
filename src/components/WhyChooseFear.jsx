@@ -73,9 +73,9 @@ const WhyChooseFear = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 w-full max-w-full" style={{ overflow: 'hidden' }}>
       <motion.div 
-        className="max-w-container mx-auto"
+        className="max-w-container mx-auto w-full"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
@@ -90,11 +90,11 @@ const WhyChooseFear = () => {
         </motion.h2>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 w-full">
           {features.map((feature, index) => (
             <motion.div 
               key={index}
-              className="rounded-3xl overflow-hidden shadow-lg relative group"
+              className="rounded-3xl overflow-hidden shadow-lg relative group w-full max-w-full"
               style={{ backgroundColor: '#BFBCB6' }}
               variants={cardVariants}
               whileHover={{ 
@@ -104,9 +104,9 @@ const WhyChooseFear = () => {
                 transition: { duration: 0.2, ease: "easeOut" }
               }}
             >
-              {/* Number Badge */}
+              {/* Number Badge - Safe positioning */}
               <motion.div 
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-full flex items-center justify-center font-serif text-xs sm:text-sm font-bold"
+                className="absolute top-2 right-2 sm:top-4 sm:right-4 md:top-6 md:right-6 z-10 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-black text-white rounded-full flex items-center justify-center font-serif text-xs sm:text-sm md:text-base font-bold"
                 initial={{ scale: 0, rotate: -180 }}
                 whileInView={{ scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
