@@ -29,7 +29,7 @@ const ParallaxServices = () => {
     {
       title: 'AI Solutions',
       image: '/AI.jpg',
-      link: 'https://fear-ai-solutions.netlify.app/',
+      link: 'https://ai.fearagency.in/',
       items: [
         'AI Customization',
         'AI Automation',
@@ -40,7 +40,7 @@ const ParallaxServices = () => {
     {
       title: 'Branding\nAnd Collaboration',
       image: '/branding.png',
-      link: 'https://fear-branding.netlify.app/',
+      link: 'https://brand.fearagency.in/',
       items: [
         'Logo Design',
         'Poster Design',
