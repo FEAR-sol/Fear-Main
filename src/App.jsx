@@ -30,7 +30,7 @@ function AppContent() {
       <div 
         className="bg-radial-gray min-h-screen flex flex-col no-horizontal-scroll viewport-safe" 
         style={{ 
-          overflow: 'hidden', 
+          overflowX: 'hidden', 
           maxWidth: '100vw', 
           width: '100vw',
           position: 'relative'
@@ -40,7 +40,7 @@ function AppContent() {
         <main 
           className="flex-grow no-horizontal-scroll viewport-safe" 
           style={{ 
-            overflow: 'hidden', 
+            overflowX: 'hidden', 
             maxWidth: '100vw', 
             width: '100vw',
             position: 'relative'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import ServiceCard from './ServiceCard';
+import ParallaxServiceCard from './ParallaxServiceCard';
 
 const ParallaxServices = () => {
   const services = [
@@ -84,9 +84,15 @@ const ParallaxServices = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 w-full">
-          {/* Sticky Text Section */}
+          {/* Enhanced Sticky Text Section */}
           <motion.div 
-            className="lg:sticky lg:top-32 lg:self-start h-fit w-full max-w-full overflow-hidden"
+            className="lg:sticky lg:top-24 lg:self-start h-fit w-full max-w-full overflow-hidden"
+            style={{
+              // Ensure sticky behavior works properly
+              position: 'sticky',
+              top: '6rem', // 24 * 0.25rem = 6rem
+              zIndex: 20
+            }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -159,43 +165,49 @@ const ParallaxServices = () => {
             </motion.div>
           </motion.div>
 
-          {/* Scrolling Services Section */}
-          <div className="space-y-4 sm:space-y-6 md:space-y-8 py-2 sm:py-4 md:py-6 lg:py-8 w-full max-w-full overflow-hidden">
-            {services.map((service, index) => (
-              <motion.div 
-                key={index} 
-                className="min-h-[auto] sm:min-h-[20vh] md:min-h-[25vh] lg:min-h-[30vh] flex items-center relative"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 50 }}
-                viewport={{ once: false, margin: "-50px", amount: 0.3 }}
-                transition={{ 
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: [0.6, -0.05, 0.01, 0.99]
-                }}
-              >
-                {/* Number Badge - Hidden on mobile to prevent overflow */}
-                <motion.div
-                  className="absolute left-2 md:left-4 lg:-left-2 xl:-left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center font-serif text-sm sm:text-lg md:text-xl font-bold text-black shadow-lg z-10 hidden sm:flex mobile-hide"
-                  initial={{ scale: 0, rotate: -180 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  exit={{ scale: 0, rotate: 180 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ delay: 0.2 + index * 0.1, type: "spring", stiffness: 200 }}
+          {/* Enhanced Scrolling Services Section with Proper Height */}
+          <div 
+            className="w-full max-w-full overflow-hidden px-2 sm:px-0"
+            style={{
+              // Ensure enough height for proper sticky behavior
+              minHeight: '200vh' // This ensures the sticky content stays until all cards are scrolled
+            }}
+          >
+            <div className="space-y-8 sm:space-y-12 md:space-y-16 py-2 sm:py-4 md:py-6 lg:py-8">
+              {services.map((service, index) => (
+                <motion.div 
+                  key={index} 
+                  className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center relative w-full max-w-full"
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 50 }}
+                  viewport={{ once: false, margin: "-50px", amount: 0.3 }}
+                  transition={{ 
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    ease: [0.6, -0.05, 0.01, 0.99]
+                  }}
                 >
-                  {index + 1}
+                  {/* Number Badge - Hidden on mobile to prevent overflow */}
+                  <motion.div
+                    className="absolute left-2 md:left-4 lg:-left-2 xl:-left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center font-serif text-sm sm:text-lg md:text-xl font-bold text-black shadow-lg z-10 hidden sm:flex mobile-hide"
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    exit={{ scale: 0, rotate: 180 }}
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ delay: 0.2 + index * 0.1, type: "spring", stiffness: 200 }}
+                  >
+                    {index + 1}
+                  </motion.div>
+                  <div className="w-full sm:pl-6 md:pl-8 lg:pl-8 xl:pl-12 max-w-full">
+                    <ParallaxServiceCard 
+                      image={service.image}
+                      link={service.link}
+                    />
+                  </div>
                 </motion.div>
-                <div className="w-full sm:pl-6 md:pl-8 lg:pl-8 xl:pl-12">
-                  <ServiceCard 
-                    title={service.title} 
-                    items={service.items}
-                    image={service.image}
-                    link={service.link}
-                  />
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

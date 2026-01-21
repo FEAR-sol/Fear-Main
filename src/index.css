@@ -50,14 +50,15 @@ body {
     position: relative;
   }
   
-  /* Prevent touch scrolling horizontally */
+  /* Enable vertical scrolling but prevent horizontal */
   body {
     touch-action: pan-y pinch-zoom !important;
     overscroll-behavior-x: none !important;
     -webkit-overflow-scrolling: touch;
+    overflow-y: auto !important;
   }
   
-  /* Force all elements to stay within viewport */
+  /* Force all elements to stay within viewport but allow vertical scroll */
   div, section, main, article, aside, header, footer, nav, span, p, h1, h2, h3, h4, h5, h6 {
     max-width: 100vw !important;
     overflow-x: hidden !important;
@@ -79,7 +80,14 @@ body {
   }
 }
 
-/* Additional safety for preventing horizontal scroll */
+/* Viewport constraint utility */
+.viewport-safe {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  position: relative;
+}
+
+/* No horizontal scroll utility */
 .no-horizontal-scroll {
   overflow-x: hidden !important;
   max-width: 100vw !important;
@@ -96,13 +104,6 @@ section {
   overflow-x: hidden !important;
 }
 
-/* Viewport constraint utility */
-.viewport-safe {
-  max-width: 100vw !important;
-  overflow-x: hidden !important;
-  position: relative;
-}
-
 /* Mobile-specific absolute positioning safety */
 @media (max-width: 768px) {
   .mobile-safe-absolute {
@@ -116,20 +117,75 @@ section {
     display: none !important;
   }
   
-  /* Mobile image constraints */
-  .mobile-image-container {
-    width: 100% !important;
-    height: 144px !important; /* h-36 = 144px */
+  /* ParallaxServiceCard image constraints - All Devices */
+  .bg-fear-card {
+    max-width: 100% !important;
     overflow: hidden !important;
-    position: relative !important;
   }
   
-  .mobile-image-container img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+  .bg-fear-card img {
+    object-fit: contain !important;
     object-position: center !important;
-    display: block !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  
+  /* Mobile specific - ParallaxServiceCard */
+  @media (max-width: 639px) {
+    .bg-fear-card {
+      max-width: calc(100vw - 2rem) !important;
+      margin: 0 auto !important;
+    }
+    
+    .bg-fear-card > div:first-child > div:first-child > div {
+      height: 160px !important;
+      min-height: 160px !important;
+      max-height: 160px !important;
+      padding: 0.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    .bg-fear-card img {
+      max-height: 140px !important;
+    }
+  }
+  
+  /* Tablet specific - ParallaxServiceCard */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .bg-fear-card > div:first-child > div:nth-child(2) > div {
+      height: 200px !important;
+      min-height: 200px !important;
+      max-height: 200px !important;
+      padding: 1rem !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    .bg-fear-card img {
+      max-height: 180px !important;
+    }
+  }
+  
+  /* Desktop specific - ParallaxServiceCard */
+  @media (min-width: 1024px) {
+    .bg-fear-card > div:first-child > div:last-child > div {
+      height: 240px !important;
+      min-height: 240px !important;
+      max-height: 240px !important;
+      padding: 1.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    .bg-fear-card img {
+      max-height: 210px !important;
+    }
   }
   
   /* Remove any potential vertical lines or borders on mobile */

@@ -9,7 +9,7 @@ const Home = () => {
     <div 
       className="viewport-safe no-horizontal-scroll" 
       style={{ 
-        overflow: 'hidden', 
+        overflowX: 'hidden', 
         maxWidth: '100vw', 
         width: '100vw',
         position: 'relative'

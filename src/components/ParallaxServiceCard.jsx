@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const ServiceCard = ({ image, link }) => {
+const ParallaxServiceCard = ({ image, link }) => {
   return (
     <motion.div 
       className="bg-fear-card rounded-2xl sm:rounded-3xl overflow-hidden flex flex-col h-full relative group cursor-pointer w-full max-w-full"
@@ -14,18 +14,18 @@ const ServiceCard = ({ image, link }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* Responsive Image Container - Full Image Visibility */}
+      {/* Responsive Image Container - Optimized for All Devices */}
       {image && (
         <div className="relative w-full bg-gray-50 overflow-hidden">
-          {/* Mobile and Tablet Image Container - Full Image Display */}
-          <div className="block lg:hidden w-full relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-gray-50">
+          {/* Mobile Image Container - Optimized */}
+          <div className="block sm:hidden w-full relative overflow-hidden rounded-t-2xl bg-gray-50">
             <div 
               className="w-full relative flex items-center justify-center"
               style={{
-                minHeight: '180px',
-                height: 'auto',
-                paddingTop: '0.75rem',
-                paddingBottom: '0.75rem'
+                height: '160px',
+                minHeight: '160px',
+                maxHeight: '160px',
+                padding: '0.5rem'
               }}
             >
               <img
@@ -39,7 +39,39 @@ const ServiceCard = ({ image, link }) => {
                   width: 'auto',
                   height: 'auto',
                   maxWidth: '100%',
-                  maxHeight: '180px'
+                  maxHeight: '100%'
+                }}
+                onError={(e) => {
+                  e.target.style.objectFit = 'contain';
+                  e.target.style.backgroundColor = '#f5f5f5';
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Tablet Image Container - Optimized */}
+          <div className="hidden sm:block lg:hidden w-full relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-gray-50">
+            <div 
+              className="w-full relative flex items-center justify-center"
+              style={{
+                height: '200px',
+                minHeight: '200px',
+                maxHeight: '200px',
+                padding: '1rem'
+              }}
+            >
+              <img
+                src={image}
+                alt="Service"
+                className="max-w-full max-h-full object-contain"
+                loading="lazy"
+                style={{
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                  width: 'auto',
+                  height: 'auto',
+                  maxWidth: '100%',
+                  maxHeight: '100%'
                 }}
                 onError={(e) => {
                   e.target.style.objectFit = 'contain';
@@ -49,14 +81,15 @@ const ServiceCard = ({ image, link }) => {
             </div>
           </div>
           
-          {/* Desktop Image Container */}
+          {/* Desktop Image Container - Optimized */}
           <div className="hidden lg:block w-full relative overflow-hidden bg-gray-50">
             <div 
               className="w-full relative overflow-hidden flex items-center justify-center"
               style={{ 
-                height: '280px',
-                minHeight: '280px',
-                padding: '1rem'
+                height: '240px',
+                minHeight: '240px',
+                maxHeight: '240px',
+                padding: '1.5rem'
               }}
             >
               <motion.img
@@ -83,16 +116,16 @@ const ServiceCard = ({ image, link }) => {
               />
               {/* Desktop hover overlay */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-fear-dark/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute inset-0 bg-gradient-to-t from-fear-dark/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               />
             </div>
           </div>
         </div>
       )}
 
-      {/* Content Section - Only Click Me Button */}
+      {/* Content Section - Only Click to Explore Button */}
       <div className="p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col justify-center items-center relative w-full max-w-full overflow-hidden">
-        {/* Responsive Click Me Button */}
+        {/* Responsive Click to Explore Button */}
         {link && (
           <motion.a
             href={link}
@@ -133,4 +166,4 @@ const ServiceCard = ({ image, link }) => {
   );
 };
 
-export default ServiceCard;
+export default ParallaxServiceCard;
