@@ -1,3 +1,18 @@
 {
-    "javascript.autoClosingTags": false
+    "javascript.autoClosingTags": false,
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "tailwindCSS.includeLanguages": {
+        "javascript": "javascript",
+        "html": "html"
+    },
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "css.lint.unknownAtRules": "ignore",
+    "css.customData": [".vscode/css_custom_data.json"],
+    "files.associations": {
+        "*.css": "css"
+    }
 }

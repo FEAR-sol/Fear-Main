@@ -63,8 +63,21 @@ const ParallaxServices = () => {
   };
 
   return (
-    <section id="services" className="relative py-12 sm:py-16 md:py-20 bg-fear-dark w-full max-w-full" style={{ overflow: 'hidden' }}>
-      <div className="absolute inset-0 w-full h-full" style={{ overflow: 'hidden' }}>
+    <section 
+      id="services" 
+      className="relative py-12 sm:py-16 md:py-20 bg-fear-dark w-full max-w-full"
+      style={{
+        touchAction: 'auto',
+        WebkitOverflowScrolling: 'touch'
+      }}
+    >
+      <div 
+        className="absolute inset-0 w-full h-full overflow-hidden"
+        style={{
+          touchAction: 'auto',
+          pointerEvents: 'none'
+        }}
+      >
       {/* Animated Background Pattern */}
       <motion.div
         className="absolute inset-0 opacity-5"
@@ -82,17 +95,11 @@ const ParallaxServices = () => {
       />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 w-full" style={{ touchAction: 'auto' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 w-full" style={{ touchAction: 'auto' }}>
           {/* Enhanced Sticky Text Section */}
           <motion.div 
-            className="lg:sticky lg:top-24 lg:self-start h-fit w-full max-w-full overflow-hidden"
-            style={{
-              // Ensure sticky behavior works properly
-              position: 'sticky',
-              top: '6rem', // 24 * 0.25rem = 6rem
-              zIndex: 20
-            }}
+            className="lg:sticky lg:top-24 lg:self-start h-fit w-full max-w-full"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -102,6 +109,10 @@ const ParallaxServices = () => {
                   staggerChildren: 0.15
                 }
               }
+            }}
+            style={{
+              touchAction: 'auto',
+              WebkitOverflowScrolling: 'touch'
             }}
           >
             <motion.div
@@ -167,10 +178,11 @@ const ParallaxServices = () => {
 
           {/* Enhanced Scrolling Services Section with Proper Height */}
           <div 
-            className="w-full max-w-full overflow-hidden px-2 sm:px-0"
+            className="w-full max-w-full px-2 sm:px-0"
             style={{
-              // Ensure enough height for proper sticky behavior
-              minHeight: '200vh' // This ensures the sticky content stays until all cards are scrolled
+              minHeight: '200vh',
+              touchAction: 'auto',
+              WebkitOverflowScrolling: 'touch'
             }}
           >
             <div className="space-y-8 sm:space-y-12 md:space-y-16 py-2 sm:py-4 md:py-6 lg:py-8">

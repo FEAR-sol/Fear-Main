@@ -7,12 +7,13 @@ import WhyChooseFear from '../components/WhyChooseFear';
 const Home = () => {
   return (
     <div 
-      className="viewport-safe no-horizontal-scroll" 
-      style={{ 
-        overflowX: 'hidden', 
-        maxWidth: '100vw', 
-        width: '100vw',
-        position: 'relative'
+      className="viewport-safe no-horizontal-scroll"
+      style={{
+        touchAction: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        height: 'auto'
       }}
     >
       <Hero />

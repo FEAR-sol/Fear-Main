@@ -8,10 +8,14 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import Loader from './components/Loader';
 import PageLoader from './components/PageLoader';
+import { useMobileScrollFix } from './hooks/useMobileScrollFix';
 
 function AppContent() {
   const [isPageLoading, setIsPageLoading] = useState(false);
   const location = useLocation();
+
+  // CRITICAL: Apply mobile scroll fix
+  useMobileScrollFix();
 
   useEffect(() => {
     // Show page loader on route change
@@ -28,22 +32,25 @@ function AppContent() {
     <>
       <PageLoader isLoading={isPageLoading} />
       <div 
-        className="bg-radial-gray min-h-screen flex flex-col no-horizontal-scroll viewport-safe" 
-        style={{ 
-          overflowX: 'hidden', 
-          maxWidth: '100vw', 
-          width: '100vw',
-          position: 'relative'
+        className="bg-radial-gray min-h-screen flex flex-col no-horizontal-scroll viewport-safe"
+        style={{
+          touchAction: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          height: 'auto',
+          minHeight: '100vh'
         }}
       >
         <Navbar />
         <main 
-          className="flex-grow no-horizontal-scroll viewport-safe" 
-          style={{ 
-            overflowX: 'hidden', 
-            maxWidth: '100vw', 
-            width: '100vw',
-            position: 'relative'
+          className="flex-grow no-horizontal-scroll viewport-safe"
+          style={{
+            touchAction: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            height: 'auto'
           }}
         >
           <Routes>

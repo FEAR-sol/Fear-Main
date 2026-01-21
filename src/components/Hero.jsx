@@ -53,8 +53,20 @@ const Hero = () => {
   ];
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 relative w-full max-w-full" style={{ overflow: 'hidden' }}>
-      <div className="absolute inset-0 w-full h-full" style={{ overflow: 'hidden' }}>
+    <section 
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 relative w-full max-w-full"
+      style={{
+        touchAction: 'auto',
+        WebkitOverflowScrolling: 'touch'
+      }}
+    >
+      <div 
+        className="absolute inset-0 w-full h-full overflow-hidden"
+        style={{
+          touchAction: 'auto',
+          pointerEvents: 'none'
+        }}
+      >
       {/* Animated Background Shapes - Completely hidden on mobile */}
       {floatingShapes.map((shape, index) => (
         <motion.div
@@ -93,6 +105,10 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
         variants={containerVariants}
+        style={{
+          touchAction: 'auto',
+          WebkitOverflowScrolling: 'touch'
+        }}
       >
         {/* Decorative Top Element */}
         <motion.div
