@@ -18,7 +18,7 @@ const ParallaxServices = () => {
     {
       title: 'App Development',
       image: '/APP.png',
-      link: 'https://app-development2101.netlify.app/',
+      link: 'https://app.fearagency.in',
       items: [
         'App Design',
         'App Development',
