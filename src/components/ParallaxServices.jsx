@@ -7,7 +7,7 @@ const ParallaxServices = () => {
     {
       title: 'Web Development',
       image: '/web.jpg',
-      link: 'https://fear-web-dev.netlify.app/',
+      link: 'https://web.fearagency.in',
       items: [
         'Web Design',
         'Web Development', 
