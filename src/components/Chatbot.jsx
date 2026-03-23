@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { type: 'bot', text: "Hi! I'm Cyra, FEAR's AI assistant. How can I help you today?" }
+    { type: 'bot', text: "Hi! I'm Cyra, FEAR's AI assistant. I can help you learn about our services, process, team, and more. What would you like to know?" }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
@@ -21,56 +21,68 @@ const Chatbot = () => {
   const fearKnowledge = {
     about: {
       keywords: ['what is fear', 'about fear', 'tell me about fear', 'who are you', 'what do you do'],
-      response: "FEAR is a creative studio that designs, develops, and deploys digital solutions. We help ambitious brands transform ideas into scalable ecosystems through branding, technology, and intelligent automation—all under one roof. We exist to build foundations for growth, not just deliver projects."
+      response: "FEAR is a technology product studio and AI-driven digital agency. We design, develop, and deploy digital platforms — websites, mobile apps, AI tools, and brand identities — for startups and growing businesses. We're not just a service provider; we're a product-building partner."
     },
     birth: {
       keywords: ['birth of fear', 'how fear started', 'fear origin', 'when fear started', 'fear history'],
-      response: "Every great idea starts quietly. FEAR was born to change the overwhelming process of turning vision into reality. We built FEAR as a place where ideas feel safe to grow—where design meets engineering, branding connects with technology, and AI empowers humans. FEAR is for those building something meaningful, for founders who care about quality, and for brands that want to last."
+      response: "FEAR was born from a simple belief: great ideas deserve great execution. We built FEAR as a place where design meets engineering, branding connects with technology, and AI empowers humans. FEAR is for founders who care about quality and brands that want to last."
     },
     vision: {
       keywords: ['vision', 'fear vision', 'what is your vision'],
-      response: "FEAR's vision is to build a world where brands grow through clarity, systems, and intelligent design—not chaos. We envision a future where businesses operate as connected ecosystems, where identity, technology, and automation work seamlessly together. Our vision is to become a studio that designs growth itself—quietly, precisely, and sustainably."
+      response: "FEAR's vision is to build a world where brands grow through clarity, systems, and intelligent design — not chaos. We want to become a studio that designs growth itself — quietly, precisely, and sustainably."
     },
     mission: {
       keywords: ['mission', 'fear mission', 'what is your mission'],
-      response: "Our mission is to help ambitious brands transform ideas into scalable ecosystems through branding, technology, and intelligent automation. We create brand identities that feel intentional and timeless, build digital experiences that convert and scale, engineer systems that reduce complexity, integrate AI as silent infrastructure, and partner with founders who value long-term vision over short-term wins."
+      response: "Our mission is to help ambitious brands transform ideas into scalable digital products through design, technology, and AI — all under one roof. We build foundations for growth, not just deliver projects."
     },
     services: {
       keywords: ['services', 'what services', 'what do you offer', 'offerings'],
-      response: "FEAR offers four main pillars of services:\n\n1. Web Development - Web Design, Development, Hosting & Maintenance, SEO Optimization\n\n2. App Development - App Design, Development, Maintenance & Support, ASO Integration\n\n3. AI Solutions - AI Customization, Automation, Chatbots, Voice Assistants\n\n4. Branding & Collaboration - Logo Design, Poster Design, Thumbnail Design, Brochure Design"
+      response: "FEAR offers four core capabilities:\n\n1. Web Platforms — Custom websites and digital platforms built for performance and scale\n\n2. Mobile Applications — User-focused apps for iOS and Android\n\n3. AI Automation — Smart workflows, chatbots, and AI-powered tools\n\n4. Brand & Product Design — Logos, identities, and UI/UX design"
     },
     web: {
       keywords: ['web development', 'website', 'web design', 'web services'],
-      response: "Our Web Development services include:\n• Web Design - Creating beautiful, user-friendly interfaces\n• Web Development - Building robust, scalable websites\n• Hosting & Maintenance - Reliable hosting and ongoing support\n• SEO Optimization & Integration - Ensuring your site ranks well and performs optimally"
+      response: "Our Web Development services include:\n• Web Design — Beautiful, conversion-focused interfaces\n• Web Development — Scalable, performant platforms\n• Hosting & Maintenance — Reliable infrastructure and ongoing support\n• SEO Optimization — Ensuring your site ranks and performs"
     },
     app: {
       keywords: ['app development', 'mobile app', 'application'],
-      response: "Our App Development services include:\n• App Design - Intuitive and engaging mobile interfaces\n• App Development - Native and cross-platform solutions\n• Maintenance and Support - Ongoing updates and technical support\n• ASO and Integration - App Store Optimization and seamless integrations"
+      response: "Our App Development services include:\n• App Design — Intuitive mobile interfaces\n• App Development — Native and cross-platform solutions\n• Maintenance & Support — Ongoing updates and technical support\n• ASO & Integration — App Store Optimization and seamless integrations"
     },
     ai: {
-      keywords: ['ai solutions', 'artificial intelligence', 'ai services', 'automation'],
-      response: "Our AI Solutions include:\n• AI Customization - Tailored AI solutions for your business\n• AI Automation - Streamlining workflows and processes\n• AI Chatbot - Intelligent conversational interfaces\n• AI Voice Assistant - Voice-enabled AI interactions"
+      keywords: ['ai solutions', 'artificial intelligence', 'ai services', 'automation', 'chatbot'],
+      response: "Our AI capabilities include:\n• AI Automation — Streamlining workflows and reducing manual work\n• AI Chatbots — Intelligent conversational interfaces for your product\n• AI Voice Assistants — Voice-enabled AI interactions\n• Custom AI Integration — Embedding AI into your existing systems"
     },
     branding: {
-      keywords: ['branding', 'design', 'logo', 'graphics'],
-      response: "Our Branding & Collaboration services include:\n• Logo Design - Memorable brand identities\n• Poster Design - Eye-catching promotional materials\n• Thumbnail Design - Engaging visual content\n• Brochure Design - Professional marketing collateral"
+      keywords: ['branding', 'design', 'logo', 'graphics', 'brand identity'],
+      response: "Our Branding services include:\n• Logo Design — Memorable, premium brand identities\n• Brand Identity Systems — Colors, typography, and visual language\n• Poster & Thumbnail Design — Engaging visual content\n• Brochure Design — Professional marketing collateral"
+    },
+    startup: {
+      keywords: ['startup', 'founder', 'first website', 'early stage', 'mvp', 'new business'],
+      response: "FEAR is startup-friendly by design. We work with early-stage founders who need quality execution without agency overhead. Whether you need your first website, a brand identity, a mobile MVP, or an AI chatbot — we scope it right, build it fast, and make sure it works. No bloated retainers. Just focused execution."
+    },
+    process: {
+      keywords: ['process', 'how do you work', 'workflow', 'methodology', 'steps'],
+      response: "Our process:\n1. Discovery — Understanding your business, goals, and challenges\n2. Design — Creating UI/UX concepts and digital architecture\n3. Development — Building scalable platforms with modern tech\n4. AI Integration — Adding automation and intelligent workflows where it adds real value\n5. Launch & Support — Deploying and maintaining your product long-term"
+    },
+    results: {
+      keywords: ['results', 'outcomes', 'what results', 'success', 'track record'],
+      response: "FEAR delivers measurable outcomes:\n• 100% client satisfaction rate\n• 8+ products shipped\n• 3x faster development with AI tools\n• 24/7 support and maintenance\n\nOur first client project was a full e-commerce platform — designed, built, and deployed end-to-end."
     },
     team: {
       keywords: ['team', 'who works', 'team members', 'people'],
-      response: "Meet our talented team:\n• YASHASWI - Full Stack Developer\n• MAANASA - UI/UX Designer\n• SUGEET - Full Stack Developer\n• NIKITHA - Digital Marketing Lead\n• DWIRAJ - Backend Developer\n• SHRAVANI - Associate UI/UX Designer"
+      response: "Meet the FEAR team:\n• YASHASWI — Full Stack Developer\n• MAANASA — UI/UX Designer\n• SUGEET — Full Stack Developer\n• NIKITHA — Digital Marketing Lead\n• DWIRAJ — Backend Developer\n• SHRAVANI — Associate UI/UX Designer"
     },
     contact: {
-      keywords: ['contact', 'email', 'reach', 'get in touch', 'mail'],
-      response: "You can reach FEAR at:\n📧 Email: [Your email here]\n📱 Instagram: [Your Instagram handle]\n💼 LinkedIn: [Your LinkedIn profile]\n📘 Facebook: [Your Facebook page]\n\nFeel free to reach out for any inquiries or collaborations!"
+      keywords: ['contact', 'email', 'reach', 'get in touch', 'mail', 'hire'],
+      response: "Ready to build something? Head to our Contact page or reach out directly. We respond fast and love talking to founders with real ideas."
     },
     pricing: {
-      keywords: ['price', 'cost', 'pricing', 'how much', 'rates'],
-      response: "Our pricing varies based on project scope and requirements. Each project is unique, and we provide customized quotes. Please contact us with your specific needs, and we'll provide a detailed proposal tailored to your goals and budget."
+      keywords: ['price', 'cost', 'pricing', 'how much', 'rates', 'budget'],
+      response: "Our pricing is scoped per project — no one-size-fits-all packages. We work with startups and growing businesses, so we're flexible on budget. Reach out with your project details and we'll give you a clear, honest proposal."
     },
-    process: {
-      keywords: ['process', 'how do you work', 'workflow', 'methodology'],
-      response: "Our process is simple yet effective:\n1. Discovery - Understanding your vision and goals\n2. Strategy - Planning the optimal approach\n3. Design - Creating beautiful, functional solutions\n4. Development - Building with precision and quality\n5. Testing - Ensuring everything works perfectly\n6. Launch - Deploying your solution\n7. Support - Ongoing maintenance and growth"
-    }
+    articles: {
+      keywords: ['articles', 'blogs', 'content', 'insights', 'read'],
+      response: "FEAR publishes articles and blog posts on AI, web design, branding, startups, and product building. Check out the Articles and Blogs sections in the navigation to read our latest insights."
+    },
   };
 
   const findResponse = (userInput) => {

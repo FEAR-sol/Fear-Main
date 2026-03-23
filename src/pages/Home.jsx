@@ -1,7 +1,9 @@
 import React from 'react';
 import Hero from '../components/Hero';
-import Services from '../components/Services';
+import WhatWeBuild from '../components/WhatWeBuild';
 import ParallaxServices from '../components/ParallaxServices';
+import ProcessSection from '../components/ProcessSection';
+import StartupFriendly from '../components/StartupFriendly';
 import WhyChooseFear from '../components/WhyChooseFear';
 
 const Home = () => {
@@ -17,8 +19,10 @@ const Home = () => {
       }}
     >
       <Hero />
-      <Services />
+      <WhatWeBuild />
       <ParallaxServices />
+      <ProcessSection />
+      <StartupFriendly />
       <WhyChooseFear />
     </div>
   );
