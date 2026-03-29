@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { subscribeEmail } from '../data/blogsData';
+import { subscribeToNewsletter } from '../utils/api';
 
 const SubscribeBox = ({ compact = false }) => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState(null); // 'success' | 'error' | 'duplicate'
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus('error');
       return;
     }
+
     setLoading(true);
-    setTimeout(() => {
-      const result = subscribeEmail(email);
-      setStatus(result.success ? 'success' : 'duplicate');
-      setLoading(false);
-      if (result.success) setEmail('');
-    }, 600);
+    const result = await subscribeToNewsletter(email);
+    setLoading(false);
+
+    if (result.success) {
+      setStatus('success');
+      setEmail('');
+    } else if (result.duplicate) {
+      setStatus('duplicate');
+    } else {
+      setStatus('error');
+    }
   };
 
   return (
@@ -41,7 +47,7 @@ const SubscribeBox = ({ compact = false }) => {
           Get weekly insights on AI, websites, and digital growth.
         </p>
 
-        <form onSubmit={handleSubmit} className={`flex gap-3 ${compact ? 'flex-col sm:flex-row' : 'flex-col sm:flex-row'}`}>
+        <form onSubmit={handleSubmit} className="flex gap-3 flex-col sm:flex-row">
           <input
             type="email"
             value={email}
@@ -71,8 +77,8 @@ const SubscribeBox = ({ compact = false }) => {
                 status === 'duplicate' ? 'text-yellow-400' : 'text-red-400'
               }`}
             >
-              {status === 'success' && '✓ You\'re in. Welcome to the FEAR community.'}
-              {status === 'duplicate' && 'You\'re already subscribed.'}
+              {status === 'success' && "✓ You're in. Welcome to the FEAR community."}
+              {status === 'duplicate' && "You're already subscribed."}
               {status === 'error' && 'Please enter a valid email address.'}
             </motion.p>
           )}
