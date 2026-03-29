@@ -3,12 +3,105 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   const teamMembers = [
-    { name: 'YASHASWI', role: 'FULL STACK DEVELOPER', image: '/yashaswi.JPG' },
-    { name: 'MAANASA', role: 'UI/UX DESIGNER', image: '/maanasa.jpeg' },
-    { name: 'SUGEET', role: 'FULL STACK DEVELOPER', image: '/sugeet.jpeg' },
-    { name: 'NIKITHA', role: 'DIGITAL MARKETING LEAD', image: '/nikitha.JPG' },
-    { name: 'DWIRAJ', role: 'BACKEND DEVELOPER', image: '/dwiraj.jpeg' },
-    { name: 'SHRAVANI', role: 'ASSOCIATE UI/UX DESIGNER', image: '/shravani.jpeg' },
+    {
+      name: 'YASHASWI',
+      role: 'CO-FOUNDER & FULL STACK DEVELOPER',
+      image: '/yashaswi.JPG',
+      bio: [
+        'Leads development and drives execution at FEAR',
+        'Builds scalable web & app solutions (React, Node.js)',
+        'Turned freelance experience into a growing agency',
+        'Believes in action, consistency, and learning by doing',
+      ],
+    },
+    {
+      name: 'MAANASA',
+      role: 'CO-FOUNDER & UI/UX DESIGNER',
+      image: '/maanasa.jpeg',
+      bio: [
+        'Designs intuitive and user-focused experiences',
+        'Transforms ideas into clean, impactful interfaces',
+        'Drives FEAR\'s design direction and creativity',
+        'Believes confidence comes through consistent action',
+      ],
+    },
+    {
+      name: 'SUGEET',
+      role: 'CO-FOUNDER & FULL STACK DEVELOPER',
+      image: '/sugeet.jpeg',
+      bio: [
+        'Transitioned from EEE to full-stack development',
+        'Contributes to both tech and business decisions',
+        'Helps build and scale FEAR from ground up',
+        'Focused on adaptability, teamwork, and execution',
+      ],
+    },
+    {
+      name: 'NIKITHA',
+      role: 'MARKETING LEAD & SOCIAL MEDIA MANAGER',
+      image: '/nikitha.JPG',
+      bio: [
+        'Leads marketing strategy and brand communication',
+        'Manages social media growth and content direction',
+        'Turns ideas into engaging digital presence',
+        'Drives visibility and audience connection',
+      ],
+    },
+    {
+      name: 'SHRAVANI',
+      role: 'UI/UX DESIGNER',
+      image: '/shravani.jpeg',
+      bio: [
+        'Designs modern and user-friendly app interfaces',
+        'Works with Figma & Framer for product design',
+        'Continuously improving through hands-on projects',
+        'Focused on growth through consistency',
+      ],
+    },
+    {
+      name: 'DWIRAJ',
+      role: 'BACKEND DEVELOPER',
+      image: '/dwiraj.jpeg',
+      bio: [
+        'Develops backend systems and integrations',
+        'Manages databases and server-side logic',
+        'Contributes to FEAR website and client projects',
+        'Focused on building strong technical foundations',
+      ],
+    },
+    {
+      name: 'ARPITHA',
+      role: 'CONTENT EXECUTIVE',
+      image: '/arpitha.jpeg',
+      bio: [
+        'Creates blogs, content, and brand messaging',
+        'Supports outreach and marketing campaigns',
+        'Blends creativity with communication strategy',
+        'Builds clarity through content execution',
+      ],
+    },
+    {
+      name: 'FATHIN',
+      role: 'VIDEOGRAPHER & EDITOR',
+      image: '/fathin.jpeg',
+      bio: [
+        'Creates reels and visual content for FEAR',
+        'Handles editing, storytelling, and production',
+        'Improves engagement through creative visuals',
+        'Focused on consistent creative growth',
+      ],
+    },
+    {
+      name: 'MADHU CHARAN',
+      role: 'AUTOMATION & BACKEND DEVELOPER',
+      image: '/madhu.jpeg',
+      bio: [
+        'Builds automation systems and backend workflows',
+        'Works with Node.js & Python for scalability',
+        'Improves efficiency through smart solutions',
+        'Focused on solving real-world problems',
+      ],
+    },
   ];
 
   const containerVariants = {
@@ -143,11 +236,19 @@ const About = () => {
                   {/* Photo */}
                   <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'absolute', top: 0, left: 0 }} />
 
-                  {/* Overlay content */}
-                  <div className="team-card-overlay">
-                    <h4 className="font-jacques text-2xl sm:text-3xl text-black text-center">{member.name}</h4>
-                    <div style={{ height: '2px', width: '60px', backgroundColor: 'black' }} />
-                    <p className="text-gray-700 text-xs sm:text-sm font-medium tracking-widest text-center uppercase">{member.role}</p>
+                  {/* Hover bio overlay */}
+                  <div className="team-card-overlay" style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '20px', gap: '8px' }}>
+                    <h4 className="font-jacques text-xl sm:text-2xl text-black">{member.name}</h4>
+                    <div style={{ height: '2px', width: '40px', backgroundColor: 'black', marginBottom: '4px' }} />
+                    <p className="text-gray-700 text-xs font-semibold tracking-widest uppercase mb-2">{member.role}</p>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      {member.bio.map((point, i) => (
+                        <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
+                          <span style={{ color: 'black', fontWeight: 'bold', marginTop: '1px', flexShrink: 0 }}>—</span>
+                          <span className="text-gray-800" style={{ fontSize: '11px', lineHeight: '1.4' }}>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
                 <motion.div className="relative">
