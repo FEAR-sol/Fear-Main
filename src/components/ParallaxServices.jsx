@@ -1,4 +1,3 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ParallaxServiceCard from './ParallaxServiceCard';
 
@@ -9,19 +8,6 @@ const ParallaxServices = () => {
     { image: '/AI.jpg', link: 'https://ai.fearagency.in/' },
     { image: '/branding.png', link: 'https://brand.fearagency.in/' },
   ];
-
-  const [current, setCurrent] = useState(0);
-  const timerRef = useRef(null);
-  const n = services.length;
-
-  const goTo = useCallback((i) => setCurrent((i + n) % n), [n]);
-
-  const resetTimer = useCallback(() => {
-    clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => setCurrent(p => (p + 1) % n), 5000);
-  }, [n]);
-
-  useEffect(() => { resetTimer(); return () => clearInterval(timerRef.current); }, [resetTimer]);
 
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -35,6 +21,7 @@ const ParallaxServices = () => {
         animate={{ backgroundPosition: ['0px 0px', '100px 100px'] }}
         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
       />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
         {/* Header */}
         <motion.div className="text-center mb-12 sm:mb-16" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.15 } } }}>
@@ -52,42 +39,17 @@ const ParallaxServices = () => {
           </motion.p>
         </motion.div>
 
-        {/* Carousel */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          {/* Left Arrow */}
-          <button onClick={() => { goTo(current - 1); resetTimer(); }}
-            style={{ flexShrink: 0, width: '48px', height: '48px', borderRadius: '50%', background: 'white', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}>
-            <svg width="20" height="20" fill="none" stroke="black" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
-          </button>
-
-          {/* Viewport */}
-          <div style={{ flex: 1, minWidth: 0, overflow: 'hidden', borderRadius: '16px', position: 'relative' }}>
-            {services.map((service, i) => (
-              <div key={i} style={{
-                position: i === 0 ? 'relative' : 'absolute',
-                top: 0, left: 0, width: '100%',
-                opacity: i === current ? 1 : 0,
-                transform: `translateX(${(i - current) * 100}%)`,
-                transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease',
-                pointerEvents: i === current ? 'auto' : 'none',
-              }}>
-                <ParallaxServiceCard image={service.image} link={service.link} />
-              </div>
-            ))}
-          </div>
-
-          {/* Right Arrow */}
-          <button onClick={() => { goTo(current + 1); resetTimer(); }}
-            style={{ flexShrink: 0, width: '48px', height: '48px', borderRadius: '50%', background: 'white', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}>
-            <svg width="20" height="20" fill="none" stroke="black" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-          </button>
-        </div>
-
-        {/* Dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '24px' }}>
-          {services.map((_, i) => (
-            <button key={i} onClick={() => { goTo(i); resetTimer(); }}
-              style={{ width: i === current ? '28px' : '8px', height: '8px', borderRadius: '4px', border: 'none', cursor: 'pointer', background: i === current ? 'white' : 'rgba(255,255,255,0.3)', transition: 'all 0.3s ease' }} />
+        {/* Stacked cards — just scroll */}
+        <div className="space-y-8 sm:space-y-12">
+          {services.map((service, i) => (
+            <motion.div key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <ParallaxServiceCard image={service.image} link={service.link} />
+            </motion.div>
           ))}
         </div>
       </div>
