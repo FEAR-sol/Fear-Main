@@ -237,7 +237,7 @@ const About = () => {
                   <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'absolute', top: 0, left: 0 }} />
 
                   {/* Hover bio overlay */}
-                  <div className="team-card-overlay" style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '20px', gap: '8px' }}>
+                  <div className="team-card-overlay">
                     <h4 className="font-jacques text-xl sm:text-2xl text-black">{member.name}</h4>
                     <div style={{ height: '2px', width: '40px', backgroundColor: 'black', marginBottom: '4px' }} />
                     <p className="text-gray-700 text-xs font-semibold tracking-widest uppercase mb-2">{member.role}</p>
