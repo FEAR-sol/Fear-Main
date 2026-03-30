@@ -5,10 +5,6 @@ const ParallaxServiceCard = ({ image, link }) => {
     <motion.div
       style={{ borderRadius: '20px', overflow: 'hidden', background: '#1a1a2e', width: '100%' }}
       whileHover={{ y: -6, transition: { duration: 0.3, ease: 'easeOut' } }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
     >
       {/* Image — full width, natural height, no crop */}
       {image && (
