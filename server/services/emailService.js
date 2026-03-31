@@ -3,6 +3,16 @@ const { Resend } = require('resend');
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
+ * Validate email service configuration before sending.
+ * Returns null if valid, or an error string if misconfigured.
+ */
+const validateEmailConfig = () => {
+  if (!process.env.RESEND_API_KEY) return 'RESEND_API_KEY is not set.';
+  if (!process.env.FROM_EMAIL) return 'FROM_EMAIL is not set.';
+  return null;
+};
+
+/**
  * Build the notification email HTML
  */
 const buildEmailHtml = ({ title, description, slug, type }) => {
@@ -87,6 +97,12 @@ const buildEmailHtml = ({ title, description, slug, type }) => {
  * Resend supports up to 50 recipients per call — we chunk for safety
  */
 const sendNotificationEmails = async ({ subscribers, title, description, slug, type }) => {
+  const configError = validateEmailConfig();
+  if (configError) {
+    console.error(`[emailService] Cannot send notification emails: ${configError}`);
+    return { totalSent: 0, errors: [{ batch: 0, error: configError }] };
+  }
+
   const BATCH_SIZE = 50;
   const from = `${process.env.FROM_NAME || 'FEAR Studio'} <${process.env.FROM_EMAIL}>`;
   const typeLabel = type === 'article' ? 'Article' : 'Blog';
@@ -111,7 +127,7 @@ const sendNotificationEmails = async ({ subscribers, title, description, slug, t
       totalSent += batch.length;
     } catch (err) {
       errors.push({ batch: i / BATCH_SIZE + 1, error: err.message });
-      console.error(`Batch ${i / BATCH_SIZE + 1} failed:`, err.message);
+      console.error(`[emailService] Batch ${i / BATCH_SIZE + 1} failed:`, err.message);
     }
   }
 
@@ -122,6 +138,12 @@ const sendNotificationEmails = async ({ subscribers, title, description, slug, t
  * Send a welcome email to a new subscriber
  */
 const sendWelcomeEmail = async (email) => {
+  const configError = validateEmailConfig();
+  if (configError) {
+    console.error(`[emailService] Cannot send welcome email: ${configError}`);
+    return; // Non-critical — fail silently but with a log
+  }
+
   const baseUrl = process.env.CLIENT_URL || 'http://localhost:3000';
   const from = `${process.env.FROM_NAME || 'FEAR Studio'} <${process.env.FROM_EMAIL}>`;
 
@@ -160,7 +182,7 @@ const sendWelcomeEmail = async (email) => {
     await resend.emails.send({ from, to: [email], subject: 'Welcome to FEAR Studio', html });
   } catch (err) {
     // Non-critical — log but don't fail the subscription
-    console.error('Welcome email failed:', err.message);
+    console.error('[emailService] Welcome email failed:', err.message);
   }
 };
 

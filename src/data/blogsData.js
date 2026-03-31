@@ -294,15 +294,8 @@ export const toggleLike = (id) => {
   return !liked;
 };
 
-export const subscribeEmail = (email) => {
-  try {
-    const subs = JSON.parse(localStorage.getItem('fear_subscribers') || '[]');
-    if (subs.includes(email)) return { success: false, message: 'Already subscribed.' };
-    subs.push(email);
-    localStorage.setItem('fear_subscribers', JSON.stringify(subs));
-    return { success: true };
-  } catch { return { success: false }; }
-};
+// NOTE: subscribeEmail() was removed — subscriptions are handled server-side
+// via POST /api/subscribe. See src/utils/api.js → subscribeToNewsletter().
 
 export const CATEGORY_COLORS = {
   AI: 'bg-fear-dark text-white',
