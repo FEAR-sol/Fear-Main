@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import SEO from '../components/SEO';
 import { ARTICLES, BLOGS, findBySlug, getLikes, getLikeCounts, toggleLike, CATEGORY_COLORS } from '../data/blogsData';
 import SubscribeBox from '../components/SubscribeBox';
 import BlogCard from '../components/BlogCard';
@@ -154,6 +155,13 @@ const ArticlePage = () => {
 
   return (
     <>
+      <SEO 
+        title={`${blog.title} - FEAR Agency`}
+        description={blog.excerpt}
+        keywords={`${blog.category}, ${blog.title}, FEAR agency blog, web development, technology`}
+        image={blog.image}
+        type="article"
+      />
       <ScrollProgress />
       <div className="min-h-screen bg-radial-gray pt-20 pb-20 w-full max-w-full overflow-x-hidden">
 

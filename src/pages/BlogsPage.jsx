@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import BlogCard from '../components/BlogCard';
 import SubscribeBox from '../components/SubscribeBox';
 import { ARTICLES, BLOGS } from '../data/blogsData';
@@ -21,13 +22,19 @@ const ContentListPage = ({ type }) => {
     : 'Thoughts, opinions, and behind-the-scenes from Team FEAR.';
 
   return (
-    <div className="min-h-screen bg-radial-gray pt-24 pb-20 px-4 sm:px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-      <div className="max-w-container mx-auto">
+    <>
+      <SEO 
+        title={isArticles ? 'Articles - FEAR Agency | AI, Technology & Product Insights' : 'Blogs - FEAR Agency | Thoughts & Behind-the-Scenes'}
+        description={isArticles ? 'Explore in-depth articles on AI, technology, web development, and product building from FEAR Agency experts.' : 'Read thoughts, opinions, and behind-the-scenes stories from the FEAR Agency team about design, development, and digital innovation.'}
+        keywords={isArticles ? 'AI articles, technology insights, web development guides, product building, tech blog' : 'FEAR blog, agency insights, design thoughts, development stories, digital innovation'}
+      />
+      <div className="min-h-screen bg-radial-gray pt-24 pb-20 px-4 sm:px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+        <div className="max-w-container mx-auto">
 
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          {/* Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="text-center mb-6"
         >
@@ -85,6 +92,7 @@ const ContentListPage = ({ type }) => {
         <SubscribeBox />
       </div>
     </div>
+    </>
   );
 };
 

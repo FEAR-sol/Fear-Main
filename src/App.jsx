@@ -9,10 +9,12 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BlogsPage from './pages/BlogsPage';
 import ArticlePage from './pages/ArticlePage';
+import NotFound from './pages/NotFound';
 import Loader from './components/Loader';
 import PageLoader from './components/PageLoader';
 import PageTransition from './components/PageTransition';
 import { useMobileScrollFix } from './hooks/useMobileScrollFix';
+import { initGA, trackPageView } from './utils/analytics';
 
 function AppContent() {
   const [isPageLoading, setIsPageLoading] = useState(false);
@@ -22,6 +24,9 @@ function AppContent() {
   useMobileScrollFix();
 
   useEffect(() => {
+    // Track page view
+    trackPageView(location.pathname + location.search);
+    
     // Show page loader on route change
     setIsPageLoading(true);
     
@@ -30,7 +35,7 @@ function AppContent() {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   return (
     <>
@@ -67,6 +72,7 @@ function AppContent() {
                 <Route path="/articles/:slug" element={<ArticlePage />} />
                 <Route path="/blogs" element={<BlogsPage type="blog" />} />
                 <Route path="/blogs/:slug" element={<ArticlePage />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </PageTransition>
           </AnimatePresence>
@@ -82,6 +88,9 @@ function App() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
+    // Initialize Google Analytics
+    initGA();
+    
     // Initial load
     const timer = setTimeout(() => {
       setIsInitialLoading(false);
