@@ -32,7 +32,7 @@ async function sendEmail(subscribers, blog) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      from: 'FEAR Agency <onboarding@resend.dev>',
+      from: 'FEAR Agency <notifications@fearagency.in>',
       to: subscribers,
       subject: `New ${blog.type === 'blog' ? 'Blog' : 'Article'} from FEAR Agency: ${blog.title}`,
       html: `
