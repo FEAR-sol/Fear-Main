@@ -85,7 +85,7 @@ function getNewBlogs() {
         
         // Extract blog details from blogsData.js
         const blogMatch = blogsDataContent.match(new RegExp(
-          `{[^}]*slug:\\s*['"]${slug}['"][^}]*title:\\s*['"]([^'"]+)['"][^}]*excerpt:\\s*['"]([^'"]+)['"][^}]*}`,
+          `{[^}]*slug:\\s*['"]${slug}['"][^}]*title:\\s*['"]([^'"]+)['"][^}]*description:\\s*['"]([^'"]+)['"][^}]*}`,
           's'
         ));
         
@@ -110,6 +110,11 @@ function getNewBlogs() {
 // Main function
 async function main() {
   console.log('Checking for new blogs...');
+  console.log('Environment check:');
+  console.log('- FIREBASE_API_KEY:', process.env.FIREBASE_API_KEY ? 'Set' : 'Missing');
+  console.log('- FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID ? 'Set' : 'Missing');
+  console.log('- FIREBASE_APP_ID:', process.env.FIREBASE_APP_ID ? 'Set' : 'Missing');
+  console.log('- RESEND_API_KEY:', process.env.RESEND_API_KEY ? 'Set' : 'Missing');
   
   const newBlogs = getNewBlogs();
   
@@ -120,6 +125,7 @@ async function main() {
 
   console.log(`Found ${newBlogs.length} new blog(s):`, newBlogs.map(b => b.title));
 
+  console.log('Fetching subscribers from Firebase...');
   const subscribers = await getAllSubscribers();
   
   if (subscribers.length === 0) {
@@ -127,11 +133,12 @@ async function main() {
     return;
   }
 
-  console.log(`Sending notifications to ${subscribers.length} subscribers...`);
+  console.log(`Sending notifications to ${subscribers.length} subscribers:`, subscribers);
 
   for (const blog of newBlogs) {
+    console.log(`Sending notification for "${blog.title}"...`);
     const result = await sendEmail(subscribers, blog);
-    console.log(`Sent notification for "${blog.title}":`, result);
+    console.log('Result:', JSON.stringify(result, null, 2));
   }
 
   console.log('All notifications sent!');
