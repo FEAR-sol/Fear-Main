@@ -287,6 +287,29 @@ Each subscriber gets an email with the blog title, excerpt, and a direct link to
 
 If you're reading this, it means the system is working! Thanks for being part of our community.`,
   },
+  {
+    id: 'b6',
+    slug: 'second-notification-test',
+    title: 'Second Test: Email Notifications Working',
+    description: 'Testing the fixed notification system after resolving the description field issue.',
+    category: 'Studio',
+    date: 'April 20, 2026',
+    readTime: '1 min read',
+    author: 'Team FEAR',
+    image: '/web.jpg',
+    type: 'blog',
+    content: `This is our second test of the email notification system.
+
+**What we fixed**
+
+The script was looking for an 'excerpt' field but our blogs use 'description'. We've now fixed this issue and added better logging to track the notification process.
+
+**Testing again**
+
+If you receive this email, it means our automatic notification system is now working perfectly! Every time we publish a new blog or article, all subscribers will be notified automatically.
+
+Thanks for your patience as we tested this feature!`,
+  },
 ];
 
 // ─── SHARED UTILITIES ────────────────────────────────────────────────────────
@@ -303,10 +326,10 @@ export const getLikes = () => {
 export const getLikeCounts = () => {
   try {
     const stored = JSON.parse(localStorage.getItem('fear_like_counts') || '{}');
-    const defaults = { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0 };
+    const defaults = { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0, b6: 0 };
     return { ...defaults, ...stored };
   } catch {
-    return { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0 };
+    return { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0, b6: 0 };
   }
 };
 
