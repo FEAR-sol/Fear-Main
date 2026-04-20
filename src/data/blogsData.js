@@ -310,6 +310,33 @@ If you receive this email, it means our automatic notification system is now wor
 
 Thanks for your patience as we tested this feature!`,
   },
+  {
+    id: 'b7',
+    slug: 'final-notification-test',
+    title: 'Final Test: Domain Verified Successfully',
+    description: 'Testing email notifications with our verified domain fearagency.in. All subscribers should receive this!',
+    category: 'Studio',
+    date: 'April 20, 2026',
+    readTime: '1 min read',
+    author: 'Team FEAR',
+    image: '/branding.png',
+    type: 'blog',
+    content: `This is the final test of our email notification system!
+
+**What's new**
+
+We've now verified our domain fearagency.in with Resend, which means we can send emails to all subscribers, not just test addresses. Emails will now come from notifications@fearagency.in.
+
+**How it works**
+
+Every time we publish a new blog or article and push to GitHub, our automated system will:
+- Detect the new content
+- Fetch all active subscribers from Firebase
+- Send a beautiful email notification to everyone
+- All completely automatic!
+
+If you're reading this email, congratulations - you're part of our subscriber community and you'll be the first to know about all our new content!`,
+  },
 ];
 
 // ─── SHARED UTILITIES ────────────────────────────────────────────────────────
@@ -326,10 +353,10 @@ export const getLikes = () => {
 export const getLikeCounts = () => {
   try {
     const stored = JSON.parse(localStorage.getItem('fear_like_counts') || '{}');
-    const defaults = { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0, b6: 0 };
+    const defaults = { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0, b6: 0, b7: 0 };
     return { ...defaults, ...stored };
   } catch {
-    return { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0, b6: 0 };
+    return { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0, b6: 0, b7: 0 };
   }
 };
 
