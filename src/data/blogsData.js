@@ -260,6 +260,33 @@ Async communication is underrated. Loom lets us record quick walkthroughs for cl
 
 That's the stack. Simple, fast, and it works.`,
   },
+  {
+    id: 'b5',
+    slug: 'testing-email-notifications',
+    title: 'Testing Our New Email Notification System',
+    description: 'A quick test to verify that our automatic blog notification system is working correctly for all subscribers.',
+    category: 'Studio',
+    date: 'April 20, 2026',
+    readTime: '2 min read',
+    author: 'Team FEAR',
+    image: '/APP.png',
+    type: 'blog',
+    content: `This is a test blog post to verify our automatic email notification system.
+
+**What we're testing**
+
+We've just implemented a new system that automatically sends email notifications to all subscribers whenever we publish a new blog or article. This test will help us confirm everything is working as expected.
+
+**How it works**
+
+When we push a new blog to our GitHub repository, a GitHub Action automatically detects the change, retrieves all subscriber emails from our Firebase database, and sends a beautifully formatted email notification via Resend.
+
+**What subscribers receive**
+
+Each subscriber gets an email with the blog title, excerpt, and a direct link to read the full post. The emails are designed to be clean, professional, and mobile-friendly.
+
+If you're reading this, it means the system is working! Thanks for being part of our community.`,
+  },
 ];
 
 // ─── SHARED UTILITIES ────────────────────────────────────────────────────────
@@ -276,10 +303,10 @@ export const getLikes = () => {
 export const getLikeCounts = () => {
   try {
     const stored = JSON.parse(localStorage.getItem('fear_like_counts') || '{}');
-    const defaults = { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15 };
+    const defaults = { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0 };
     return { ...defaults, ...stored };
   } catch {
-    return { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15 };
+    return { a1: 24, a2: 18, a3: 47, a4: 9, b1: 31, b2: 12, b3: 7, b4: 15, b5: 0 };
   }
 };
 
