@@ -1,6 +1,31 @@
 // ─── ARTICLES (long-form, deep-dive) ────────────────────────────────────────
 export const ARTICLES = [
-  // Add your articles here
+  {
+    id: 'a1',
+    slug: 'test-article-notification',
+    title: 'Testing Article Notifications',
+    description: 'Verifying that email notifications work for articles just like they do for blogs.',
+    category: 'AI',
+    date: 'April 20, 2026',
+    readTime: '2 min read',
+    author: 'Team FEAR',
+    image: '/AI.jpg',
+    type: 'article',
+    content: `This is a test article to verify that our email notification system works for articles too.
+
+**Testing articles**
+
+The notification system automatically detects whether new content is a blog or an article and sends the appropriate email. Articles are typically longer, more in-depth pieces compared to blogs.
+
+**What happens**
+
+When we push this article to GitHub, all subscribers should receive an email with:
+- Subject: "New Article from FEAR Agency: Testing Article Notifications"
+- The article description
+- A link to read the full article
+
+If you receive this email, it confirms that notifications work perfectly for both blogs and articles!`,
+  },
 ];
 
 // ─── BLOGS (shorter, conversational, opinion-driven) ─────────────────────────
