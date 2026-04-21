@@ -38,7 +38,7 @@ const PageLoader = ({ isLoading }) => {
                 className="h-full bg-fear-dark rounded-full"
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
               />
             </div>
           </div>

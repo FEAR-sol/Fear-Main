@@ -132,7 +132,7 @@ const About = () => {
   };
 
   return (
-    <section className="min-h-screen py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 flex items-center justify-center relative overflow-hidden w-full max-w-full">
+    <section className="min-h-screen py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 flex items-center justify-center relative overflow-hidden w-full max-w-full" style={{ paddingTop: 'calc(5rem + 80px)' }}>
       <motion.div
         className="absolute top-0 left-0 w-full h-full opacity-5"
         style={{

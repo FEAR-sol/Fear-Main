@@ -5,7 +5,7 @@ export const initGA = () => {
   const measurementId = process.env.REACT_APP_GA_MEASUREMENT_ID;
   
   if (!measurementId) {
-    console.warn('Google Analytics Measurement ID not found. Add REACT_APP_GA_MEASUREMENT_ID to .env');
+    // GA not configured — skip silently in development
     return;
   }
 

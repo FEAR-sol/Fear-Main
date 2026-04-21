@@ -1,33 +1,46 @@
 import { motion } from 'framer-motion';
-import { fadeUp, scaleUp, staggerContainer, lineDraw, viewport, EASE } from '../utils/animations';
+import { fadeUp, staggerContainer, lineDraw, viewport, EASE } from '../utils/animations';
+import { Link } from 'react-router-dom';
 
 const features = [
   {
     title: 'Full-Stack Studio',
-    description: 'From your first logo to AI-powered automation, from a high-converting website to a scalable mobile app — all under one roof, one team, one vision.',
-    image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&h=300&fit=crop',
+    description: 'Logo to AI automation, website to mobile app — all under one roof, one team, one vision.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+    ),
     number: '01',
   },
   {
     title: 'Long-Term Partnership',
-    description: "We don't disappear after launch. Every choice is made with your long-term growth in mind — not short-term delivery.",
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop',
+    description: "We don't disappear after launch. Every decision is made with your long-term growth in mind.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
     number: '02',
   },
   {
     title: 'End-to-End Execution',
-    description: 'We understand your vision, align with your goals, and build solutions that evolve as your business grows — from MVP to scale.',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=300&fit=crop',
+    description: 'We align with your goals and build solutions that evolve as your business grows — from MVP to scale.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
     number: '03',
   },
 ];
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 48 },
+  hidden: { opacity: 0, y: 40 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: EASE, delay: i * 0.12 },
+    transition: { duration: 0.6, ease: EASE, delay: i * 0.1 },
   }),
 };
 
@@ -42,22 +55,25 @@ const WhyChooseFear = () => {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="text-center mb-14"
+          className="text-center mb-10"
         >
           <motion.p variants={fadeUp} custom={0} className="text-fear-text-gray text-xs font-medium tracking-[0.3em] uppercase mb-4">
             Why Us
           </motion.p>
           <motion.h2
             variants={fadeUp} custom={0.1}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-center tracking-wider text-fear-dark"
+            className="text-3xl sm:text-4xl md:text-5xl font-serif text-center tracking-wider text-fear-dark"
           >
             WHY CHOOSE FEAR?
           </motion.h2>
-          <motion.div variants={lineDraw(0.3)} className="h-px w-16 bg-fear-dark/20 mx-auto mt-5" />
+          <motion.div variants={lineDraw(0.3)} className="h-px w-16 bg-fear-dark/20 mx-auto mt-5 mb-4" />
+          <motion.p variants={fadeUp} custom={0.2} className="text-fear-text-gray text-sm sm:text-base max-w-xl mx-auto">
+            We're not just a vendor. We're the team that ships, stays, and scales with you.
+          </motion.p>
         </motion.div>
 
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 w-full">
+        {/* Feature Cards — no images, clean icon cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8 sm:mb-10 w-full">
           {features.map((feature, i) => (
             <motion.div
               key={i}
@@ -67,64 +83,36 @@ const WhyChooseFear = () => {
               whileInView="visible"
               viewport={viewport}
               whileHover={{
-                y: -10,
-                boxShadow: '0 24px 48px rgba(26,26,26,0.16)',
+                y: -8,
+                boxShadow: '0 20px 40px rgba(26,26,26,0.12)',
                 transition: { duration: 0.25, ease: [0, 0, 0.2, 1] },
               }}
-              className="rounded-3xl overflow-hidden shadow-lg relative group w-full"
-              style={{ backgroundColor: '#BFBCB6' }}
+              className="rounded-2xl p-6 sm:p-8 border border-fear-dark/10 bg-fear-card/30 relative group"
             >
               {/* Number badge */}
-              <motion.div
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-fear-dark text-white rounded-full flex items-center justify-center font-serif text-sm font-bold"
-                initial={{ scale: 0, rotate: -90 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                viewport={viewport}
-                transition={{ type: 'spring', stiffness: 260, damping: 18, delay: 0.2 + i * 0.1 }}
-              >
+              <span className="absolute top-5 right-5 font-serif text-fear-dark/15 text-3xl font-bold select-none">
                 {feature.number}
-              </motion.div>
+              </span>
 
-              {/* Image */}
-              <div className="h-44 sm:h-48 overflow-hidden relative">
-                <div className="absolute inset-0 bg-fear-dark/0 group-hover:bg-fear-dark/20 transition-colors duration-300 z-10" />
-                <motion.img
-                  src={feature.image}
-                  alt={feature.title}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.06 }}
-                  transition={{ duration: 0.5, ease: EASE }}
-                />
+              {/* Icon */}
+              <div className="w-11 h-11 rounded-xl border border-fear-dark/15 flex items-center justify-center text-fear-dark mb-5 group-hover:border-fear-dark/30 transition-colors">
+                {feature.icon}
               </div>
 
-              {/* Content */}
-              <div className="p-6 sm:p-8 text-center">
-                <h3 className="text-xl sm:text-2xl font-serif mb-3 text-fear-dark">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm text-justify">{feature.description}</p>
-              </div>
-
-              {/* Bottom accent */}
-              <motion.div
-                className="h-px bg-fear-dark/20"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={viewport}
-                transition={{ duration: 0.7, ease: EASE, delay: 0.3 + i * 0.1 }}
-              />
+              <h3 className="text-lg sm:text-xl font-serif mb-2 text-fear-dark">{feature.title}</h3>
+              <p className="text-fear-text-gray text-sm leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>
 
         {/* Bottom Banner */}
         <motion.div
-          variants={scaleUp}
-          custom={0.2}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={viewport}
-          className="bg-fear-dark rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center shadow-xl relative overflow-hidden"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="bg-fear-dark rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-center shadow-xl relative overflow-hidden"
         >
-          {/* Subtle pattern */}
           <div
             className="absolute inset-0 opacity-[0.04]"
             style={{
@@ -132,23 +120,40 @@ const WhyChooseFear = () => {
             }}
           />
           <motion.h3
-            variants={fadeUp} custom={0}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={viewport}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-white mb-3 sm:mb-4 relative z-10"
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            className="text-xl sm:text-2xl md:text-3xl font-serif text-white mb-3 relative z-10"
           >
-            We focus on Clarity, Consistency, and Long-term Value
+            Clarity. Consistency. Long-term Value.
           </motion.h3>
           <motion.p
-            variants={fadeUp} custom={0.1}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={viewport}
-            className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl mx-auto relative z-10 text-justify"
+            transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
+            className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto relative z-10 mb-6"
           >
-            Every design choice, line of code, and AI solution is created with your growth in mind — not short-term delivery. FEAR doesn't just build products. We build foundations.
+            FEAR doesn't just build products. We build foundations that scale.
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewport}
+            transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
+            className="relative z-10"
+          >
+            <Link to="/contact">
+              <motion.button
+                whileHover={{ scale: 1.04, boxShadow: '0 8px 24px rgba(255,255,255,0.15)' }}
+                whileTap={{ scale: 0.97 }}
+                className="px-8 py-3 bg-white text-fear-dark rounded-full text-sm font-medium tracking-wide transition-all"
+              >
+                Start a Project →
+              </motion.button>
+            </Link>
+          </motion.div>
         </motion.div>
 
       </div>

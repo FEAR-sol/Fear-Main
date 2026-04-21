@@ -32,7 +32,7 @@ function AppContent() {
     
     const timer = setTimeout(() => {
       setIsPageLoading(false);
-    }, 1000);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [location.pathname, location.search]);

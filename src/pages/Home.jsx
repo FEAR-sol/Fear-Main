@@ -1,11 +1,10 @@
 import React from 'react';
 import SEO from '../components/SEO';
 import Hero from '../components/Hero';
+import WhyChooseFear from '../components/WhyChooseFear';
 import WhatWeBuild from '../components/WhatWeBuild';
 import ParallaxServices from '../components/ParallaxServices';
-import ProcessSection from '../components/ProcessSection';
 import StartupFriendly from '../components/StartupFriendly';
-import WhyChooseFear from '../components/WhyChooseFear';
 
 const Home = () => {
   return (
@@ -26,11 +25,10 @@ const Home = () => {
         }}
       >
         <Hero />
+        <WhyChooseFear />
         <WhatWeBuild />
         <ParallaxServices />
-        <ProcessSection />
         <StartupFriendly />
-        <WhyChooseFear />
       </div>
     </>
   );
