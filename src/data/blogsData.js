@@ -159,6 +159,29 @@ Because in the end, execution always beats hesitation.
 
 If you're building something or looking for a team that understands the journey — **FEAR Agency is here to build with you.**`,
   },
+  {
+    id: 'b2',
+    slug: 'testing-dmarc-email-delivery',
+    title: 'Testing Email Delivery with DMARC',
+    description: 'A quick test to verify that email notifications are now being delivered properly after adding the DMARC record.',
+    category: 'Studio',
+    date: 'April 20, 2026',
+    readTime: '1 min read',
+    author: 'Team FEAR',
+    image: '/APP.png',
+    type: 'blog',
+    content: `This is a test to verify that our email notifications are now working properly after adding the DMARC record to our domain.
+
+**What we fixed**
+
+We added a DMARC record to our DNS settings, which helps email providers like Gmail verify that our emails are legitimate and should be delivered to the inbox.
+
+**Testing delivery**
+
+If you receive this email in your inbox (not spam), it means everything is working perfectly! Our automatic notification system is now fully operational.
+
+Thanks for being part of our subscriber community!`,
+  },
 ];
 
 // ─── SHARED UTILITIES ────────────────────────────────────────────────────────
