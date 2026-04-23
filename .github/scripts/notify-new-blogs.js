@@ -27,7 +27,7 @@ async function getAllSubscribers() {
 async function sendEmail(subscribers, blog) {
   const results = [];
   
-  // Send emails individually to avoid any delivery issues
+  // Send emails individually with delay to avoid rate limits
   for (const email of subscribers) {
     try {
       const response = await fetch('https://api.resend.com/emails', {
@@ -66,6 +66,9 @@ async function sendEmail(subscribers, blog) {
       const result = await response.json();
       results.push({ email, result });
       console.log(`Sent to ${email}:`, result);
+      
+      // Wait 600ms between emails to respect rate limit (2 per second = 500ms, adding buffer)
+      await new Promise(resolve => setTimeout(resolve, 600));
     } catch (error) {
       console.error(`Failed to send to ${email}:`, error);
       results.push({ email, error: error.message });
