@@ -168,21 +168,23 @@ export const ALL_CONTENT = [...ARTICLES, ...BLOGS];
 export const findBySlug = (slug) => ALL_CONTENT.find((item) => item.slug === slug);
 
 export const getLikes = () => {
+  if (typeof window === 'undefined') return {};
   try { return JSON.parse(localStorage.getItem('fear_likes') || '{}'); }
   catch { return {}; }
 };
 
 export const getLikeCounts = () => {
+  if (typeof window === 'undefined') return {};
   try {
     const stored = JSON.parse(localStorage.getItem('fear_like_counts') || '{}');
-    const defaults = {};
-    return { ...defaults, ...stored };
+    return { ...stored };
   } catch {
     return {};
   }
 };
 
 export const toggleLike = (id) => {
+  if (typeof window === 'undefined') return false;
   const likes = getLikes();
   const counts = getLikeCounts();
   const liked = !!likes[id];

@@ -1,5 +1,7 @@
+'use client';
+
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { fadeUp, slideLeft, staggerContainer, viewport, EASE } from '../utils/animations';
 
 const offerings = [
@@ -74,7 +76,7 @@ const StartupFriendly = () => {
               whileInView="visible"
               viewport={viewport}
             >
-              <Link to="/contact">
+              <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.04, boxShadow: '0 8px 24px rgba(26,26,26,0.18)' }}
                   whileTap={{ scale: 0.97 }}

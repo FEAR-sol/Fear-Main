@@ -21,8 +21,8 @@
       document.body.style.minHeight = '100vh';
     }
     
-    // Apply to root when it exists
-    const root = document.getElementById('root');
+    // Apply to root when it exists (CRA uses #root, Next.js uses body directly)
+    const root = document.getElementById('root') || document.getElementById('__next');
     if (root) {
       root.style.touchAction = 'auto';
       root.style.webkitOverflowScrolling = 'touch';

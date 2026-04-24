@@ -2,10 +2,9 @@
 
 import { motion } from 'framer-motion';
 
-const PageTransition = ({ children, locationKey }) => {
+export default function Template({ children }) {
   return (
     <motion.div
-      key={locationKey}
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -4 }}
@@ -14,6 +13,4 @@ const PageTransition = ({ children, locationKey }) => {
       {children}
     </motion.div>
   );
-};
-
-export default PageTransition;
+}

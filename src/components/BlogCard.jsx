@@ -1,10 +1,12 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { getLikes, getLikeCounts, toggleLike, CATEGORY_COLORS } from '../data/blogsData';
 
 const ShareMenu = ({ blog, onClose }) => {
-  const url = `${window.location.origin}/${blog.type === 'blog' ? 'blogs' : 'articles'}/${blog.slug}`;
+  const url = `https://fearagency.in/${blog.type === 'blog' ? 'blogs' : 'articles'}/${blog.slug}`;
   const text = encodeURIComponent(`${blog.title} — FEAR`);
   const encodedUrl = encodeURIComponent(url);
 
@@ -93,7 +95,7 @@ const ShareMenu = ({ blog, onClose }) => {
 };
 
 const BlogCard = ({ blog, index = 0 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [showShare, setShowShare] = useState(false);
@@ -124,7 +126,7 @@ const BlogCard = ({ blog, index = 0 }) => {
   const handleCardClick = () => {
     const path = blog.type === 'blog' ? `/blogs/${blog.slug}` : `/articles/${blog.slug}`;
     window.scrollTo({ top: 0, behavior: 'instant' });
-    navigate(path);
+    router.push(path);
   };
 
   return (

@@ -32,7 +32,7 @@ export const useMobileScrollFix = () => {
       const criticalElements = [
         document.documentElement,
         document.body,
-        document.getElementById('root'),
+        document.getElementById('root') || document.getElementById('__next'),
         ...document.querySelectorAll('main'),
         ...document.querySelectorAll('section'),
         ...document.querySelectorAll('div'),

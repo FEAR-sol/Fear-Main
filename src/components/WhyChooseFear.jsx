@@ -1,6 +1,8 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { fadeUp, staggerContainer, lineDraw, viewport, EASE } from '../utils/animations';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const features = [
   {
@@ -144,7 +146,7 @@ const WhyChooseFear = () => {
             transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
             className="relative z-10"
           >
-            <Link to="/contact">
+            <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.04, boxShadow: '0 8px 24px rgba(255,255,255,0.15)' }}
                 whileTap={{ scale: 0.97 }}

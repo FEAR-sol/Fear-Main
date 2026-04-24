@@ -17,7 +17,7 @@ export const sendBlogNotification = async (blog) => {
       return { success: false, message: 'No subscribers found' };
     }
 
-    const RESEND_API_KEY = process.env.REACT_APP_RESEND_API_KEY;
+    const RESEND_API_KEY = process.env.NEXT_PUBLIC_RESEND_API_KEY;
     
     if (!RESEND_API_KEY) {
       console.error('Resend API key not found');

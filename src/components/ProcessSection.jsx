@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { fadeUp, slideLeft, slideRight, staggerContainer, viewport, EASE } from '../utils/animations';
 

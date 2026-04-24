@@ -16,10 +16,10 @@ module.exports = {
         'radial-gray': 'radial-gradient(ellipse at center, #e8e4df 0%, #c9c3bb 50%, #b5afa7 100%)',
       },
       fontFamily: {
-        'serif': ['Playfair Display', 'serif'],
-        'sans': ['Inter', 'sans-serif'],
-        'josefin': ['Josefin Slab', 'serif'],
-        'jacques': ['Jacques Francois', 'serif'],
+        'serif': ['var(--font-playfair)', 'serif'],
+        'sans': ['var(--font-inter)', 'sans-serif'],
+        'josefin': ['var(--font-josefin)', 'serif'],
+        'jacques': ['var(--font-jacques)', 'serif'],
       },
       maxWidth: {
         'container': '1200px',

@@ -1,12 +1,14 @@
+'use client';
+
 import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const Footer = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleServicesClick = (e) => {
     e.preventDefault();
-    navigate('/');
+    router.push('/');
     setTimeout(() => {
       const servicesSection = document.getElementById('services');
       if (servicesSection) {
@@ -17,7 +19,7 @@ const Footer = () => {
 
   const handleNav = (path) => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-    navigate(path);
+    router.push(path);
   };
 
   return (

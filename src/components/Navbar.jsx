@@ -1,9 +1,12 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef(null);
@@ -43,7 +46,7 @@ const Navbar = () => {
   const handleServicesClick = (e) => {
     e.preventDefault();
     setIsMenuOpen(false);
-    navigate('/');
+    router.push('/');
     setTimeout(() => {
       const servicesSection = document.getElementById('services');
       if (servicesSection) {
@@ -55,7 +58,7 @@ const Navbar = () => {
   const handlePageNavigation = (path) => {
     setIsMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'instant' });
-    navigate(path);
+    router.push(path);
   };
 
   const navLinks = [
@@ -95,7 +98,7 @@ const Navbar = () => {
         <div className="max-w-container mx-auto px-4 sm:px-8 py-2 flex items-center justify-between w-full">
           {/* Logo — larger on mobile */}
           <Link
-            to="/"
+            href="/"
             className="flex items-center flex-shrink-0"
             onClick={() => setIsMenuOpen(false)}
           >

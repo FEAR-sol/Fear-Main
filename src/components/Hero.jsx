@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const TICKER_ITEMS = [
   'Web Development', 'AI Automation', 'Mobile Apps', 'Brand Identity',
@@ -213,7 +215,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 1.2, ease: EASE }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10"
           >
-            <Link to="/contact" className="relative group">
+            <Link href="/contact" className="relative group">
               <motion.button
                 whileHover={{ scale: 1.06, boxShadow: '0 14px 32px rgba(26,26,26,0.3)' }}
                 whileTap={{ scale: 0.97 }}
@@ -240,7 +242,7 @@ const Hero = () => {
               </span>
             </Link>
 
-            <Link to="/about" className="relative group">
+            <Link href="/about" className="relative group">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 8px 24px rgba(26,26,26,0.1)' }}
                 whileTap={{ scale: 0.97 }}

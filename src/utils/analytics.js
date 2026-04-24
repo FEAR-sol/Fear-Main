@@ -1,8 +1,8 @@
 // Google Analytics 4 Setup
-// To use: Add your GA4 Measurement ID to .env as REACT_APP_GA_MEASUREMENT_ID
+// To use: Add your GA4 Measurement ID to .env as NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 export const initGA = () => {
-  const measurementId = process.env.REACT_APP_GA_MEASUREMENT_ID;
+  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   
   if (!measurementId) {
     // GA not configured — skip silently in development
@@ -29,7 +29,7 @@ export const initGA = () => {
 // Track page views
 export const trackPageView = (url) => {
   if (window.gtag) {
-    window.gtag('config', process.env.REACT_APP_GA_MEASUREMENT_ID, {
+    window.gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, {
       page_path: url,
     });
   }

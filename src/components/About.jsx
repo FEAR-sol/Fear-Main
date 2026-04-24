@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -234,7 +236,7 @@ const About = () => {
                 {/* Card with hover animation */}
                 <div className="team-card">
                   {/* Photo */}
-                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'absolute', top: 0, left: 0 }} />
+                  <img src={member.image} alt={member.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'absolute', top: 0, left: 0 }} />
 
                   {/* Hover bio overlay */}
                   <div className="team-card-overlay">

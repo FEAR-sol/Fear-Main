@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import SEO from '../components/SEO';
-import { ARTICLES, BLOGS, findBySlug, getLikes, getLikeCounts, toggleLike, CATEGORY_COLORS } from '../data/blogsData';
-import SubscribeBox from '../components/SubscribeBox';
-import BlogCard from '../components/BlogCard';
+'use client';
 
-// Sticky scroll progress bar
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ARTICLES, BLOGS, getLikes, getLikeCounts, toggleLike, CATEGORY_COLORS } from '../data/blogsData';
+import SubscribeBox from './SubscribeBox';
+import BlogCard from './BlogCard';
+
 const ScrollProgress = () => {
   const [progress, setProgress] = useState(0);
 
@@ -32,10 +33,10 @@ const ScrollProgress = () => {
   );
 };
 
-// Share panel for article page
 const ArticleSharePanel = ({ blog }) => {
   const [copied, setCopied] = useState(false);
-  const url = `${window.location.origin}/articles/${blog.slug}`;
+  const base = 'https://fearagency.in';
+  const url = `${base}/${blog.type === 'blog' ? 'blogs' : 'articles'}/${blog.slug}`;
   const encodedUrl = encodeURIComponent(url);
   const text = encodeURIComponent(`${blog.title} — FEAR`);
 
@@ -89,64 +90,71 @@ const ArticleSharePanel = ({ blog }) => {
   );
 };
 
-const ArticlePage = () => {
-  const { slug } = useParams();
-  const navigate = useNavigate();
-  const blog = findBySlug(slug);
-  const isArticle = blog?.type === 'article';
-  const backPath = isArticle ? '/articles' : '/blogs';
-  const backLabel = isArticle ? 'All Articles' : 'All Blogs';
+const ArticlePageClient = ({ post, backPath, backLabel }) => {
+  const router = useRouter();
+  const isArticle = post.type === 'article';
   const relatedPool = isArticle ? ARTICLES : BLOGS;
 
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
-    if (!blog) return;
     const likes = getLikes();
     const counts = getLikeCounts();
-    setLiked(!!likes[blog.id]);
-    setLikeCount(counts[blog.id] || 0);
-  }, [blog]);
-
-  if (!blog) {
-    return (
-      <div className="min-h-screen bg-radial-gray flex items-center justify-center pt-24">
-        <div className="text-center">
-          <p className="text-fear-text-gray mb-4">Article not found.</p>
-          <Link to={backPath} className="text-fear-dark underline underline-offset-4 text-sm">
-            {backLabel}
-          </Link>
-        </div>
-      </div>
-    );
-  }
+    setLiked(!!likes[post.id]);
+    setLikeCount(counts[post.id] || 0);
+  }, [post.id]);
 
   const handleLike = () => {
-    const nowLiked = toggleLike(blog.id);
+    const nowLiked = toggleLike(post.id);
     setLiked(nowLiked);
-    setLikeCount((c) => nowLiked ? c + 1 : Math.max(0, c - 1));
+    setLikeCount((c) => (nowLiked ? c + 1 : Math.max(0, c - 1)));
   };
 
-  // Related (same category, excluding current)
-  const related = relatedPool.filter((b) => b.category === blog.category && b.id !== blog.id).slice(0, 3);
+  const related = relatedPool.filter((b) => b.category === post.category && b.id !== post.id).slice(0, 3);
 
-  // Render content with basic markdown-like bold support
   const renderContent = (text) => {
     return text.split('\n\n').map((para, i) => {
-      if (para.startsWith('**') && para.endsWith('**')) {
+      if (para.startsWith('## ')) {
+        return (
+          <h2 key={i} className="font-serif text-fear-dark text-2xl sm:text-3xl font-medium mt-10 mb-4">
+            {para.replace(/^## /, '')}
+          </h2>
+        );
+      }
+      if (para.startsWith('**') && para.endsWith('**') && !para.slice(2, -2).includes('**')) {
         return (
           <h3 key={i} className="font-serif text-fear-dark text-xl sm:text-2xl font-medium mt-8 mb-3">
             {para.replace(/\*\*/g, '')}
           </h3>
         );
       }
-      // Inline bold
+      if (para.startsWith('- ') || para.startsWith('• ')) {
+        const items = para.split('\n').filter((l) => l.trim());
+        return (
+          <ul key={i} className="list-disc pl-6 space-y-1.5 mb-4 text-fear-dark/80">
+            {items.map((item, j) => (
+              <li key={j} className="text-base sm:text-lg leading-relaxed">
+                {item.replace(/^[-•]\s*/, '')}
+              </li>
+            ))}
+          </ul>
+        );
+      }
+      if (para.trim() === '---') {
+        return <hr key={i} className="border-fear-card/40 my-8" />;
+      }
       const parts = para.split(/\*\*(.*?)\*\*/g);
       return (
         <p key={i} className="text-fear-dark/80 text-base sm:text-lg leading-relaxed mb-0">
           {parts.map((part, j) =>
-            j % 2 === 1 ? <strong key={j} className="text-fear-dark font-semibold">{part}</strong> : part
+            j % 2 === 1 ? (
+              <strong key={j} className="text-fear-dark font-semibold">
+                {part}
+              </strong>
+            ) : (
+              part
+            )
           )}
         </p>
       );
@@ -155,17 +163,8 @@ const ArticlePage = () => {
 
   return (
     <>
-      <SEO 
-        title={`${blog.title} - FEAR Agency`}
-        description={blog.excerpt}
-        keywords={`${blog.category}, ${blog.title}, FEAR agency blog, web development, technology`}
-        image={blog.image}
-        type="article"
-      />
       <ScrollProgress />
       <div className="min-h-screen bg-radial-gray pt-20 pb-20 w-full max-w-full overflow-x-hidden">
-
-        {/* Hero image */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -173,16 +172,15 @@ const ArticlePage = () => {
           className="w-full h-[40vh] sm:h-[50vh] lg:h-[60vh] overflow-hidden relative"
         >
           <img
-            src={blog.image}
-            alt={blog.title}
+            src={post.image}
+            alt={post.title}
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-fear-bg/80 via-transparent to-transparent" />
         </motion.div>
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8">
-
-          {/* Back link */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -190,7 +188,7 @@ const ArticlePage = () => {
             className="mt-8 mb-6"
           >
             <button
-              onClick={() => { window.scrollTo({ top: 0, behavior: 'instant' }); navigate(backPath); }}
+              onClick={() => { window.scrollTo({ top: 0, behavior: 'instant' }); router.push(backPath); }}
               className="flex items-center gap-2 text-fear-text-gray text-sm hover:text-fear-dark transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,29 +198,27 @@ const ArticlePage = () => {
             </button>
           </motion.div>
 
-          {/* Category + meta */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <span className={`inline-block text-xs font-medium px-3 py-1 rounded-full mb-4 ${CATEGORY_COLORS[blog.category]}`}>
-              {blog.category}
+            <span className={`inline-block text-xs font-medium px-3 py-1 rounded-full mb-4 ${CATEGORY_COLORS[post.category]}`}>
+              {post.category}
             </span>
 
             <h1 className="font-serif text-fear-dark text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight mb-4">
-              {blog.title}
+              {post.title}
             </h1>
 
             <div className="flex flex-wrap items-center gap-3 text-fear-text-gray text-sm mb-6">
-              <span>{blog.author}</span>
+              <span>{post.author}</span>
               <span>·</span>
-              <span>{blog.date}</span>
+              <span>{post.date}</span>
               <span>·</span>
-              <span>{blog.readTime}</span>
+              <span>{post.readTime}</span>
             </div>
 
-            {/* Like + Share row */}
             <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-t border-b border-fear-card/40 mb-10">
               <button
                 onClick={handleLike}
@@ -241,26 +237,23 @@ const ArticlePage = () => {
                 </motion.svg>
                 <span>{likeCount} {likeCount === 1 ? 'like' : 'likes'}</span>
               </button>
-              <ArticleSharePanel blog={blog} />
+              <ArticleSharePanel blog={post} />
             </div>
           </motion.div>
 
-          {/* Article body */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="prose-custom space-y-5 mb-14"
           >
-            {renderContent(blog.content)}
+            {renderContent(post.content)}
           </motion.div>
 
-          {/* Subscribe box inline */}
           <div className="mb-16">
             <SubscribeBox compact />
           </div>
 
-          {/* Related articles */}
           {related.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -269,7 +262,7 @@ const ArticlePage = () => {
               transition={{ duration: 0.5 }}
             >
               <p className="text-fear-text-gray text-xs font-medium tracking-[0.2em] uppercase mb-6">
-                More {isArticle ? 'Articles' : 'Blogs'} in {blog.category}
+                More {isArticle ? 'Articles' : 'Blogs'} in {post.category}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {related.map((b, i) => (
@@ -284,4 +277,4 @@ const ArticlePage = () => {
   );
 };
 
-export default ArticlePage;
+export default ArticlePageClient;
