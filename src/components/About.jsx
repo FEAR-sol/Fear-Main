@@ -3,6 +3,58 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const MemberCard = ({ member, variants }) => (
+  <motion.div className="flex flex-col items-center relative group w-full max-w-full" variants={variants}>
+    <div className="team-card">
+      <img
+        src={member.image}
+        alt={member.name}
+        loading="lazy"
+        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block', position: 'absolute', top: 0, left: 0 }}
+      />
+      <div className="team-card-overlay">
+        <h4 className="font-jacques text-xl sm:text-2xl text-black">{member.name}</h4>
+        <div style={{ height: '2px', width: '40px', backgroundColor: 'black', marginBottom: '4px' }} />
+        <p className="text-gray-700 text-xs font-semibold tracking-widest uppercase mb-2">{member.role}</p>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          {member.bio.map((point, i) => (
+            <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
+              <span style={{ color: 'black', fontWeight: 'bold', marginTop: '1px', flexShrink: 0 }}>—</span>
+              <span className="text-gray-800" style={{ fontSize: '11px', lineHeight: '1.4' }}>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <motion.div className="relative">
+      <motion.h4
+        className="font-jacques text-xl sm:text-2xl text-black mb-2"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        {member.name}
+      </motion.h4>
+      <motion.div
+        className="h-0.5 bg-black absolute -bottom-1 left-0 right-0"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3, duration: 0.4 }}
+      />
+    </motion.div>
+    <motion.p
+      className="text-gray-600 text-xs sm:text-sm font-medium tracking-wide mt-3 text-center"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.4, duration: 0.5 }}
+    >
+      {member.role}
+    </motion.p>
+    <motion.div className="absolute top-2 right-2 w-6 sm:w-8 h-6 sm:h-8 border-t-2 border-r-2 border-black opacity-0 group-hover:opacity-100 transition-opacity" />
+  </motion.div>
+);
+
 const About = () => {
   const teamMembers = [
     {
@@ -72,31 +124,9 @@ const About = () => {
       ],
     },
     {
-      name: 'ARPITHA',
-      role: 'CONTENT EXECUTIVE',
-      image: '/arpitha.jpeg',
-      bio: [
-        'Creates blogs, content, and brand messaging',
-        'Supports outreach and marketing campaigns',
-        'Blends creativity with communication strategy',
-        'Builds clarity through content execution',
-      ],
-    },
-    {
-      name: 'FATHIN',
-      role: 'VIDEOGRAPHER & EDITOR',
-      image: '/fathin.jpeg',
-      bio: [
-        'Creates reels and visual content for FEAR',
-        'Handles editing, storytelling, and production',
-        'Improves engagement through creative visuals',
-        'Focused on consistent creative growth',
-      ],
-    },
-    {
       name: 'MADHU CHARAN',
       role: 'AUTOMATION & BACKEND DEVELOPER',
-      image: '/madhu.jpeg',
+      image: '/madhu_charan.jpeg',
       bio: [
         'Builds automation systems and backend workflows',
         'Works with Node.js & Python for scalability',
@@ -230,37 +260,37 @@ const About = () => {
             </motion.h2>
           </motion.div>
 
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto w-full" variants={{ visible: { transition: { staggerChildren: 0.15 } } }}>
-            {teamMembers.map((member, index) => (
-              <motion.div key={index} className="flex flex-col items-center relative group w-full max-w-full" variants={cardVariants}>
-                {/* Card with hover animation */}
-                <div className="team-card">
-                  {/* Photo */}
-                  <img src={member.image} alt={member.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'absolute', top: 0, left: 0 }} />
-
-                  {/* Hover bio overlay */}
-                  <div className="team-card-overlay">
-                    <h4 className="font-jacques text-xl sm:text-2xl text-black">{member.name}</h4>
-                    <div style={{ height: '2px', width: '40px', backgroundColor: 'black', marginBottom: '4px' }} />
-                    <p className="text-gray-700 text-xs font-semibold tracking-widest uppercase mb-2">{member.role}</p>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      {member.bio.map((point, i) => (
-                        <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
-                          <span style={{ color: 'black', fontWeight: 'bold', marginTop: '1px', flexShrink: 0 }}>—</span>
-                          <span className="text-gray-800" style={{ fontSize: '11px', lineHeight: '1.4' }}>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <motion.div className="relative">
-                  <motion.h4 className="font-jacques text-xl sm:text-2xl text-black mb-2" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }}>{member.name}</motion.h4>
-                  <motion.div className="h-0.5 bg-black absolute -bottom-1 left-0 right-0" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.4 }} />
-                </motion.div>
-                <motion.p className="text-gray-600 text-xs sm:text-sm font-medium tracking-wide mt-3 text-center" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.5 }}>{member.role}</motion.p>
-                <motion.div className="absolute top-2 right-2 w-6 sm:w-8 h-6 sm:h-8 border-t-2 border-r-2 border-black opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.div>
+          {/* Founders */}
+          <motion.div className="flex items-center justify-center gap-4 mb-8" variants={itemVariants}>
+            <div className="h-px flex-1 bg-black/20" />
+            <span className="font-jacques text-sm tracking-widest text-black/60 uppercase">The Founders</span>
+            <div className="h-px flex-1 bg-black/20" />
+          </motion.div>
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto w-full mb-16" variants={{ visible: { transition: { staggerChildren: 0.15 } } }}>
+            {teamMembers.slice(0, 3).map((member, index) => (
+              <MemberCard key={index} member={member} variants={cardVariants} />
             ))}
+          </motion.div>
+
+          {/* Core Team */}
+          <motion.div className="flex items-center justify-center gap-4 mb-8" variants={itemVariants}>
+            <div className="h-px flex-1 bg-black/20" />
+            <span className="font-jacques text-sm tracking-widest text-black/60 uppercase">The Core Team</span>
+            <div className="h-px flex-1 bg-black/20" />
+          </motion.div>
+
+          {/* Nikitha, Shravani, Dwiraj — row of 3 */}
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto w-full mb-6" variants={{ visible: { transition: { staggerChildren: 0.15 } } }}>
+            {teamMembers.slice(3, 6).map((member, index) => (
+              <MemberCard key={index} member={member} variants={cardVariants} />
+            ))}
+          </motion.div>
+
+          {/* Madhu Charan — centered solo card */}
+          <motion.div className="flex justify-center max-w-5xl mx-auto w-full" variants={{ visible: { transition: { staggerChildren: 0.15 } } }}>
+            <div className="w-full sm:w-1/2 lg:w-1/3">
+              <MemberCard member={teamMembers[6]} variants={cardVariants} />
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>

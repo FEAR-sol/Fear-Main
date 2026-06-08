@@ -70,13 +70,13 @@ const ContentListPageClient = ({ type }) => {
           ))}
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {filtered.map((item, i) => (
-            <BlogCard key={item.id} blog={item} index={i} />
-          ))}
-        </div>
-
-        <SubscribeBox />
+        {filtered.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {filtered.map((item, i) => (
+              <BlogCard key={item.id} blog={item} index={i} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
